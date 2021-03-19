@@ -34,7 +34,7 @@ public class CustomerController {
     CustomerService customerService;
     @RequestMapping(method = POST, path = "/customer/signup", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupCustomerResponse> signup(@RequestBody(required = false) final SignupCustomerRequest signupCustomerRequest) throws SignUpRestrictedException {
-        if(customerService.checkContact(signupCustomerRequest.getContactNumber()).equals(null)) {
+        if(customerService.checkContact(signupCustomerRequest.getContactNumber()) != null) {
 
             throw new SignUpRestrictedException("SGR-001", "This contact number is already registered! Try other contact number.");
         }
