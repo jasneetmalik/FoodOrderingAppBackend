@@ -1,6 +1,8 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -14,14 +16,19 @@ public class CustomerAuthEntity {
     private Integer id;
 
     @Column(name = "uuid")
+    @NotNull
+    @Size(max = 200)
     private String uuid;
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
+    @NotNull
     private CustomerEntity customer;
 
     @Column(name = "access_token")
+    @NotNull
+    @Size(max = 500)
     private String accessToken;
 
     @Column(name = "login_at")
