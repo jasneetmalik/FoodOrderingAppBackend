@@ -2,6 +2,7 @@ package com.upgrad.FoodOrderingApp.api.controller;
 
 
 import com.upgrad.FoodOrderingApp.api.model.LoginResponse;
+import com.upgrad.FoodOrderingApp.api.model.LogoutResponse;
 import com.upgrad.FoodOrderingApp.api.model.SignupCustomerRequest;
 import com.upgrad.FoodOrderingApp.api.model.SignupCustomerResponse;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
@@ -34,82 +35,18 @@ public class CustomerController {
     CustomerService customerService;
     @RequestMapping(method = POST, path = "/customer/signup", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupCustomerResponse> signup(@RequestBody(required = false) final SignupCustomerRequest signupCustomerRequest) throws SignUpRestrictedException {
-        if(customerService.checkContact(signupCustomerRequest.getContactNumber()) != null) {
 
-            throw new SignUpRestrictedException("SGR-001", "This contact number is already registered! Try other contact number.");
-        }
-        if(signupCustomerRequest.getContactNumber() == null || signupCustomerRequest.getEmailAddress() == null || signupCustomerRequest.getFirstName() == null || signupCustomerRequest.getPassword() == null) {
+        CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setContactNumber(signupCustomerRequest.getContactNumber());
+        customerEntity.setEmail(signupCustomerRequest.getEmailAddress());
+        customerEntity.setFirstName(signupCustomerRequest.getFirstName());
+        customerEntity.setLastName(signupCustomerRequest.getLastName());
+        customerEntity.setPassword(signupCustomerRequest.getPassword());
+        if(customerEntity.getContactNumber().equals("") || customerEntity.getEmail().equals("") || customerEntity.getFirstName().equals("") || customerEntity.getPassword().equals("")) {
             throw new SignUpRestrictedException("SGR-005", "Except last name all fields should be filled");
         }
-
-        try{
-        String emailFormat[] = signupCustomerRequest.getEmailAddress().split("[@,.]");
-
-
-
-            if (!(emailFormat[0].length() >= 3 && emailFormat[1].length() >= 2 && emailFormat[2].length() >= 2)) {
-                throw new SignUpRestrictedException("SGR-002", "Invalid email-id format!");
-            }
-        }catch (Exception e) {
-
-            throw new SignUpRestrictedException("SGR-002", "Invalid email-id format!");
-        }
-
-        String contactNumber = signupCustomerRequest.getContactNumber();
-        if(contactNumber.length() != 10) {
-            throw new SignUpRestrictedException("SGR-003", "Invalid contact number!");
-        }
-        char contact[] = contactNumber.toCharArray();
-        for(char a : contact) {
-            try {
-                Integer.parseInt("" + a);
-            }
-            catch (Exception e) {
-                throw new SignUpRestrictedException("SGR-003", "Invalid contact number!");
-            }
-        }
-        ArrayList<Character> list = new ArrayList();
-        list.add('#');
-        list.add('@');
-        list.add('$');
-        list.add('%');
-        list.add('&');
-        list.add('*');
-        list.add('!');
-        list.add('^');
-        String password = signupCustomerRequest.getPassword();
-        char pass[] = password.toCharArray();
-        int count1 = 0, count2 = 0, count3 = 0;
-        for(char a : pass) {
-            if(a >= '0' && a <= '9') {
-                count1++;
-            }
-            else if(a >= 'A' && a <= 'Z') {
-                count2++;
-            }
-            else if(list.contains(a)) {
-                count3++;
-            }
-
-        }
-        if(!(count1 > 0 && count2 > 0 && count3 > 0 && password.length() >= 8)) {
-            throw new SignUpRestrictedException("SGR-004", "Weak password!");
-        }
-
-        CustomerEntity customer = new CustomerEntity();
-        customer.setContactNumber(signupCustomerRequest.getContactNumber());
-        customer.setEmail(signupCustomerRequest.getEmailAddress());
-        customer.setFirstName(signupCustomerRequest.getFirstName());
-        customer.setLastName(signupCustomerRequest.getLastName());
-
-        PasswordCryptographyProvider passwordCryptographyProvider = new PasswordCryptographyProvider();
-        String encrypt[] = passwordCryptographyProvider.encrypt(signupCustomerRequest.getPassword());
-        customer.setSalt(encrypt[0]);
-        customer.setPassword(encrypt[1]);
-
-        customer.setUuid(UUID.randomUUID().toString());
-
-        customer = customerService.saveCustomer(customer);
+        CustomerEntity customer;
+        customer = customerService.saveCustomer(customerEntity);
 
         SignupCustomerResponse response = new SignupCustomerResponse();
 
@@ -187,4 +124,11 @@ public class CustomerController {
 
 
     }
+
+
+//    @RequestMapping(method = POST, path = "/customer/logout", produces = APPLICATION_JSON_UTF8_VALUE)
+//    public ResponseEntity<LogoutResponse> logout(@RequestHeader(name = "authorization") String authentication) {
+//
+//
+//    }
 }
