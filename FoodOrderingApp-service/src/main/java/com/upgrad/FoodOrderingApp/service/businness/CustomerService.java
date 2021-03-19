@@ -3,12 +3,14 @@ package com.upgrad.FoodOrderingApp.service.businness;
 import com.upgrad.FoodOrderingApp.service.dao.CustomerRepository;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
+import com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -100,8 +102,26 @@ public class CustomerService {
         return customerRepository.checkPassword(password);
     }
 
-    public boolean authenticate(String contact, String password) {
-        return customerRepository.authenticate(contact, password);
+    public CustomerAuthEntity authenticate(String contact, String password) throws AuthenticationFailedException {
+
+        CustomerEntity customerEntity;
+        customerEntity = checkContact(contact);
+        CustomerAuthEntity customerAuth = new CustomerAuthEntity();
+        String encrypt1;
+        try {
+            encrypt1 = PasswordCryptographyProvider.encrypt(password, customerEntity.getSalt());
+        } catch (Exception e) {
+            throw new AuthenticationFailedException("ATH-001", "This contact number has not been registered!");
+        }
+        if (((customerEntity = checkPassword(encrypt1)) == null)) {
+            throw new AuthenticationFailedException("ATH-002", "Invalid Credentials");
+        } else {
+            customerAuth.setCustomer(customerEntity);
+            customerAuth.setUuid(customerEntity.getUuid());
+            customerAuth.setLoginAt(ZonedDateTime.now());
+            customerAuth.setExpiresAt(ZonedDateTime.now().plusHours(1));
+            return customerAuth;
+        }
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

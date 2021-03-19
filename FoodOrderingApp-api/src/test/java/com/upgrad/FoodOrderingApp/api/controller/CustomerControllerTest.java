@@ -128,8 +128,7 @@ public class CustomerControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("code").value("SGR-001"));
         verify(mockCustomerService, times(1)).saveCustomer(any());
-    }}
-/*
+    }
     // ----------------------------- POST /customer/login --------------------------------
 
     //This test case passes when you are able to login successfully.
@@ -142,17 +141,17 @@ public class CustomerControllerTest {
         customerEntity.setUuid(customerId);
         createdCustomerAuthEntity.setCustomer(customerEntity);
 
-        when(mockCustomerService.authenticate("9090909090", "CorrectPassword"))
+        when(mockCustomerService.authenticate("7836855877", "Abcdef@1"))
                 .thenReturn(createdCustomerAuthEntity);
 
         mockMvc
                 .perform(post("/customer/login")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                        .header("authorization", "Basic " + getEncoder().encodeToString("9090909090:CorrectPassword".getBytes())))
+                        .header("authorization", "Basic " + getEncoder().encodeToString("7836855877:Abcdef@1".getBytes())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(customerId))
                 .andExpect(header().exists("access-token"));
-        verify(mockCustomerService, times(1)).authenticate("9090909090", "CorrectPassword");
+        verify(mockCustomerService, times(1)).authenticate("7836855877", "Abcdef@1");
     }
 
     //This test case passes when you have handled the exception of trying to login with invalid authorization format.
@@ -196,6 +195,7 @@ public class CustomerControllerTest {
         verify(mockCustomerService, times(1)).authenticate("9090909090", "IncorrectPassword");
     }
 
+}/*
     // ----------------------------- POST /customer/logout --------------------------------
 
     //This test case passes when you are able to logout successfully.

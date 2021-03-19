@@ -69,40 +69,25 @@ public class CustomerController {
         String encrypt[];
         String password;
         String contact;
-        String encrypt1;
-        CustomerEntity customerEntity = null;
-        CustomerAuthEntity customerAuth = new CustomerAuthEntity();
+        CustomerEntity customerEntity;
+        CustomerAuthEntity customerAuth;
         try {
             decode = Base64.getDecoder().decode(deocde[1]);
             decoded = new String(decode);
             encrypt = decoded.split(":");
             password = encrypt[1];
             contact = encrypt[0];
-            System.out.println(password);
         }
         catch (Exception e) {
             throw new AuthenticationFailedException("ATH-003", "Incorrect format of decoded customer name and password");
         }
-        customerEntity = customerService.checkContact(contact);
-        try{
-        encrypt1 = PasswordCryptographyProvider.encrypt(password, customerEntity.getSalt());}
-        catch (Exception e) {
-            throw new AuthenticationFailedException("ATH-001", "This contact number has not been registered!");
-        }
-        if(customerEntity.equals(null)) {
-            throw new AuthenticationFailedException("ATH-001", "This contact number has not been registered!");
-        }
-        else if(((customerEntity = customerService.checkPassword(encrypt1)) == null)) {
-            throw new AuthenticationFailedException("ATH-002", "Invalid Credentials");
-        }
-        else {
-                customerAuth.setCustomer(customerEntity);
-                customerAuth.setUuid(customerEntity.getUuid());
-                customerAuth.setLoginAt(ZonedDateTime.now());
-                customerAuth.setExpiresAt(ZonedDateTime.now().plusHours(1));
 
+
+        customerAuth = customerService.authenticate(contact, password);
+
+        customerEntity = customerAuth.getCustomer();
             JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(password);
-            String token = jwtTokenProvider.generateToken(customerAuth.getUuid(), customerAuth.getLoginAt(), customerAuth.getExpiresAt());
+            String token = jwtTokenProvider.generateToken(customerAuth.getUuid(), ZonedDateTime.now(), ZonedDateTime.now().plusHours(1));
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("access-token", token);
@@ -131,4 +116,4 @@ public class CustomerController {
 //
 //
 //    }
-}
+
