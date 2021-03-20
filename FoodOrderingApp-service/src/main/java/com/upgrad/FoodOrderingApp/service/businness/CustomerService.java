@@ -3,12 +3,15 @@ package com.upgrad.FoodOrderingApp.service.businness;
 import com.upgrad.FoodOrderingApp.service.dao.CustomerRepository;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
+import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -90,24 +93,58 @@ public class CustomerService {
 
 
     }
-
+//Check if Contact exists in database
     public CustomerEntity checkContact(String contact) {
 
         return customerRepository.checkContact(contact);
     }
-
+//Check if password exists in database
     public CustomerEntity checkPassword(String password) {
         return customerRepository.checkPassword(password);
     }
 
+//Authenticate using Contact Number and Password
     public boolean authenticate(String contact, String password) {
         return customerRepository.authenticate(contact, password);
     }
-
+//Save Customer Authentication Details
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerAuthEntity saveAuth(CustomerAuthEntity customerAuthEntity) {
         return customerRepository.saveAuth(customerAuthEntity);
     }
 
-//    public CustomerAuthEntity logout
+    /**
+     * This method implements the logic for 'logout' endpoint.
+     *
+     * @param accessToken Customers access token in 'Bearer <access-token>' format.
+     * @return Updated CustomerAuthEntity object.
+     * @throws AuthorizationFailedException if any of the validation fails on customer authorization.
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public CustomerAuthEntity logout(final String accessToken) throws AuthorizationFailedException {
+        final ZonedDateTime now;
+        // finds customer based on access token
+        CustomerAuthEntity loggedInCustomerAuth = customerRepository
+                .findCustomerAuthByAccessToken(accessToken);
+        // Check if the customer is logged in
+        if (loggedInCustomerAuth == null) {
+            throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
+        }
+        // Check if the customer has already logged out
+        if (loggedInCustomerAuth.getLogoutAt() != null) {
+            throw new AuthorizationFailedException("ATHR-002",
+                    "Customer is logged out. Log in again to access this endpoint.");
+        }
+        // Check if the customer's session has got expired
+        now = ZonedDateTime.now(ZoneId.systemDefault());
+        if (loggedInCustomerAuth.getExpiresAt().isBefore(now) || loggedInCustomerAuth.getExpiresAt()
+                .isEqual(now)) {
+            throw new AuthorizationFailedException("ATHR-003",
+                    "Your session is expired. Log in again to access this endpoint.");
+        }
+        //Set Logout time and Update CustomerAuth table
+        loggedInCustomerAuth.setLogoutAt(ZonedDateTime.now(ZoneId.systemDefault()));
+        CustomerAuthEntity loggedOutCustomerAuth = customerRepository.update(loggedInCustomerAuth);
+        return loggedOutCustomerAuth;
+    }
 }
