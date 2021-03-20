@@ -10,6 +10,7 @@ import com.upgrad.FoodOrderingApp.service.businness.PasswordCryptographyProvider
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException;
+import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -48,6 +49,10 @@ public class CustomerController {
         customerEntity.setLastName(signupCustomerRequest.getLastName());
         customerEntity.setPassword(signupCustomerRequest.getPassword());
         if(customerEntity.getContactNumber().equals("") || customerEntity.getEmail().equals("") || customerEntity.getFirstName().equals("") || customerEntity.getPassword().equals("")) {
+            throw new SignUpRestrictedException("SGR-005", "Except last name all fields should be filled");
+        }
+        if(customerEntity.getContactNumber() == null || customerEntity.getEmail() == null ||
+                customerEntity.getFirstName() == null || customerEntity.getPassword() == null) {
             throw new SignUpRestrictedException("SGR-005", "Except last name all fields should be filled");
         }
         CustomerEntity customer;
@@ -126,14 +131,23 @@ public class CustomerController {
             return new ResponseEntity<>(loginResponse, headers, HttpStatus.OK);
 
         }
-
-
+    }
+    @RequestMapping(method = POST, path = "/customer/logout", produces = APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<LogoutResponse> logout(@RequestHeader(name = "authorization") String authorization) throws AuthorizationFailedException {
+        final String[] bearerTokens = authorization.split("Bearer ");
+        final String accessToken;
+        if (bearerTokens.length == 2) {
+            accessToken = bearerTokens[1];
+        } else {
+            accessToken = authorization;
+        }
+        // Given access-token, logout the corresponding customer
+        CustomerAuthEntity loggedOutCustomerAuth = customerService.logout(accessToken);
+        // Generate the response of successful logout
+        LogoutResponse logoutResponse = new LogoutResponse()
+                .id(loggedOutCustomerAuth.getCustomer().getUuid())
+                .message("LOGGED OUT SUCCESSFULLY");
+        return new ResponseEntity<LogoutResponse>(logoutResponse, HttpStatus.OK);
     }
 
-
-//    @RequestMapping(method = POST, path = "/customer/logout", produces = APPLICATION_JSON_UTF8_VALUE)
-//    public ResponseEntity<LogoutResponse> logout(@RequestHeader(name = "authorization") String authentication) {
-//
-//
-//    }
 }
