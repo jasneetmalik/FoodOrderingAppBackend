@@ -3,36 +3,44 @@ package com.upgrad.FoodOrderingApp.service.businness;
 import com.upgrad.FoodOrderingApp.service.dao.CustomerRepository;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
+import com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
+import com.upgrad.FoodOrderingApp.service.exception.UpdateCustomerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.upgrad.FoodOrderingApp.service.businness.PasswordCryptographyProvider;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
 public class CustomerService {
+
     @Autowired
     CustomerRepository customerRepository;
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public CustomerEntity saveCustomer(CustomerEntity customer) throws SignUpRestrictedException {
-        if(checkContact(customer.getContactNumber()) != null) {
+    @Autowired
+    private PasswordCryptographyProvider passwordCryptographyProvider;
 
+    // ************** SAVE CUSTOMER *************************
+    @Transactional(propagation = Propagation.REQUIRED)
+    public CustomerEntity saveCustomer(CustomerEntity customer) throws SignUpRestrictedException, AuthenticationFailedException {
+
+        //Check if ContactNumber already exists
+        CustomerEntity existingCustomer = customerRepository.checkContact(customer.getContactNumber());
+        if(existingCustomer != null) {
             throw new SignUpRestrictedException("SGR-001", "This contact number is already registered! Try other contact number.");
         }
-
-
+        //Validate Email Address Format
         try{
             String emailFormat[] = customer.getEmail().split("[@,.]");
-
-
 
             if (!(emailFormat[0].length() >= 3 && emailFormat[1].length() >= 2 && emailFormat[2].length() >= 2)) {
                 throw new SignUpRestrictedException("SGR-002", "Invalid email-id format!");
@@ -41,7 +49,7 @@ public class CustomerService {
 
             throw new SignUpRestrictedException("SGR-002", "Invalid email-id format!");
         }
-
+        //Validate Length of Contact Number
         String contactNumber = customer.getContactNumber();
         if(contactNumber.length() != 10) {
             throw new SignUpRestrictedException("SGR-003", "Invalid contact number!");
@@ -55,77 +63,58 @@ public class CustomerService {
                 throw new SignUpRestrictedException("SGR-003", "Invalid contact number!");
             }
         }
-        ArrayList<Character> list = new ArrayList();
-        list.add('#');
-        list.add('@');
-        list.add('$');
-        list.add('%');
-        list.add('&');
-        list.add('*');
-        list.add('!');
-        list.add('^');
-        String password = customer.getPassword();
-        char pass[] = password.toCharArray();
-        int count1 = 0, count2 = 0, count3 = 0;
-        for(char a : pass) {
-            if(a >= '0' && a <= '9') {
-                count1++;
-            }
-            else if(a >= 'A' && a <= 'Z') {
-                count2++;
-            }
-            else if(list.contains(a)) {
-                count3++;
-            }
-
-        }
-        if(!(count1 > 0 && count2 > 0 && count3 > 0 && password.length() >= 8)) {
+        //Validate Password Complexity {
+        if (!validPassword(customer.getPassword())) {
             throw new SignUpRestrictedException("SGR-004", "Weak password!");
         }
+        //Encrypt Password
+        encryptPassword(customer);
 
-        PasswordCryptographyProvider passwordCryptographyProvider = new PasswordCryptographyProvider();
-        String encrypt[] = passwordCryptographyProvider.encrypt(customer.getPassword());
-        customer.setSalt(encrypt[0]);
-        customer.setPassword(encrypt[1]);
-
-        customer.setUuid(UUID.randomUUID().toString());
-            return customerRepository.createUser(customer);
-
+        return customerRepository.createCustomer(customer);
 
     }
-//Check if Contact exists in database
-    public CustomerEntity checkContact(String contact) {
 
-        return customerRepository.checkContact(contact);
+// ************Authenticate using Contact Number and Password **********
+    public CustomerAuthEntity authenticate(String contact, String password) throws AuthenticationFailedException {
+        //Check is Contact Exists
+        CustomerEntity registeredCustomer = customerRepository.checkContact(contact);
+        if (registeredCustomer == null) {
+            throw new AuthenticationFailedException("ATH-001", "This contact number has not been registered!");
+        }
+        final String encryptedPassword = PasswordCryptographyProvider.encrypt(password, registeredCustomer.getSalt());
+        // Verify if Password Matches
+        if (registeredCustomer.getPassword().equals(encryptedPassword)) {
+            JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(encryptedPassword);
+            CustomerAuthEntity customerAuthEntity = new CustomerAuthEntity();
+            customerAuthEntity.setUuid(UUID.randomUUID().toString());
+            final ZonedDateTime now = ZonedDateTime.now();
+            final ZonedDateTime expiresAt = now.plusHours(8);
+            customerAuthEntity.setAccessToken(
+                    jwtTokenProvider.generateToken(registeredCustomer.getUuid(), now, expiresAt));
+            customerAuthEntity.setExpiresAt(expiresAt);
+            customerAuthEntity.setCustomer(registeredCustomer);
+            customerAuthEntity.setLoginAt(now);
+            CustomerAuthEntity authCustomer = customerRepository.saveAuth(customerAuthEntity);
+            return authCustomer;
+        } else {
+            throw new AuthenticationFailedException("ATH-002", "Invalid Credentials");
+        }
     }
-//Check if password exists in database
-    public CustomerEntity checkPassword(String password) {
-        return customerRepository.checkPassword(password);
-    }
-
-//Authenticate using Contact Number and Password
-    public boolean authenticate(String contact, String password) {
-        return customerRepository.authenticate(contact, password);
-    }
-//Save Customer Authentication Details
+// ********** Save Customer Authentication Details
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerAuthEntity saveAuth(CustomerAuthEntity customerAuthEntity) {
         return customerRepository.saveAuth(customerAuthEntity);
     }
 
-    /**
-     * This method implements the logic for 'logout' endpoint.
-     *
-     * @param accessToken Customers access token in 'Bearer <access-token>' format.
-     * @return Updated CustomerAuthEntity object.
-     * @throws AuthorizationFailedException if any of the validation fails on customer authorization.
-     */
+    //************* LOGOUT CUSTOMER *****************************************
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerAuthEntity logout(final String accessToken) throws AuthorizationFailedException {
         final ZonedDateTime now;
+
         // finds customer based on access token
         CustomerAuthEntity loggedInCustomerAuth = customerRepository
                 .findCustomerAuthByAccessToken(accessToken);
+
         // Check if the customer is logged in
         if (loggedInCustomerAuth == null) {
             throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
@@ -146,5 +135,72 @@ public class CustomerService {
         loggedInCustomerAuth.setLogoutAt(ZonedDateTime.now(ZoneId.systemDefault()));
         CustomerAuthEntity loggedOutCustomerAuth = customerRepository.update(loggedInCustomerAuth);
         return loggedOutCustomerAuth;
+    }
+    @Transactional(propagation = Propagation.REQUIRED)
+    public CustomerEntity updateCustomer(final CustomerEntity customer)
+            throws AuthorizationFailedException, UpdateCustomerException {
+        // update customer details in the database
+        CustomerEntity updatedCustomer = customerRepository.updateCustomer(customer);
+        return updatedCustomer;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public CustomerEntity getCustomer(final String accessToken) throws AuthorizationFailedException {
+        // Get the customer details based on access token
+        CustomerAuthEntity customerAuth = customerRepository.findCustomerAuthByAccessToken(accessToken);
+        final ZonedDateTime now;
+        // Validates if customer is logged in
+        if (customerAuth == null) {
+            throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
+        }
+        // Validates if customer has logged out
+        if (customerAuth.getLogoutAt() != null) {
+            throw new AuthorizationFailedException("ATHR-002",
+                    "Customer is logged out. Log in again to access this endpoint.");
+        }
+        now = ZonedDateTime.now(ZoneId.systemDefault());
+        // Verifies if customer session has expired
+        if (customerAuth.getExpiresAt().isBefore(now) || customerAuth.getExpiresAt().isEqual(now)) {
+            throw new AuthorizationFailedException("ATHR-003",
+                    "Your session is expired. Log in again to access this endpoint.");
+        }
+        return customerAuth.getCustomer();
+    }
+
+    // ************ UPDATE PASSWORD ************************
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public CustomerEntity updateCustomerPassword(final String oldPassword, final String newPassword,
+                                                 final CustomerEntity customer) throws AuthorizationFailedException, UpdateCustomerException {
+        // Update customer password in the database
+        if (!validPassword(newPassword)) {
+            throw new UpdateCustomerException("UCR-001", "Weak password!");
+        }
+
+        String encryptedOldPassword = PasswordCryptographyProvider
+                .encrypt(oldPassword, customer.getSalt());
+        if (!encryptedOldPassword.equals(customer.getPassword())) {
+            throw new UpdateCustomerException("UCR-004", "Incorrect old password!");
+        }
+
+        customer.setPassword(newPassword);
+        encryptPassword(customer);
+        CustomerEntity updatedCustomer = customerRepository.updateCustomer(customer);
+        return updatedCustomer;
+    }
+    // Verify validity of password
+    private boolean validPassword(String password) {
+        String regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#@$%&*!^]).{8,}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(password);
+        return m.matches();
+    }
+
+    // Encrypts the provided password
+    private void encryptPassword(final CustomerEntity newCustomer) {
+        String password = newCustomer.getPassword();
+        final String[] encryptedData = passwordCryptographyProvider.encrypt(password);
+        newCustomer.setSalt(encryptedData[0]);
+        newCustomer.setPassword(encryptedData[1]);
     }
 }

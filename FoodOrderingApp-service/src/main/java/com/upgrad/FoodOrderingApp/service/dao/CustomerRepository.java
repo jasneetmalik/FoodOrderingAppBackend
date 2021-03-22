@@ -8,16 +8,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-
 @Repository
 public class CustomerRepository {
     @PersistenceContext
     EntityManager entityManager;
 
 //Create Customer using Signup Endpoint
-    public CustomerEntity createUser(CustomerEntity user) {
-        entityManager.persist(user);
-        return user;
+    public CustomerEntity createCustomer(CustomerEntity customer) {
+        entityManager.persist(customer);
+        return customer;
     }
 //Check if ContactNumber exists in Database
     public CustomerEntity checkContact(String contact) {
@@ -36,16 +35,6 @@ public class CustomerRepository {
         }
         catch (NoResultException noResultException) {
             return null;
-        }
-    }
-//Autheticate using Contact Number and Password
-    public boolean authenticate(String contact, String password) {
-        try {
-            entityManager.createNamedQuery("getCustomerByContactAndPassword", CustomerEntity.class).setParameter("contact", contact).setParameter("password", password).getSingleResult();
-            return true;
-        }
-        catch (NoResultException noResultException) {
-            return false;
         }
     }
 //Save Authentication details to Customer Auth table
@@ -71,4 +60,10 @@ public CustomerAuthEntity update(CustomerAuthEntity customerAuthEntity) {
     entityManager.merge(customerAuthEntity);
     return customerAuthEntity;
 }
+//Update Customer
+    public CustomerEntity updateCustomer(CustomerEntity customer) {
+        entityManager.merge(customer);
+        return customer;
+    }
+
 }
