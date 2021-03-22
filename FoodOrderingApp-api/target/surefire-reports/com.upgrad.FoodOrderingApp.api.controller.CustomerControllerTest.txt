@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest
+-------------------------------------------------------------------------------
+Tests run: 13, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 12.054 s <<< FAILURE! - in com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest
+shouldNotSignUpForEmptyRequest(com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest)  Time elapsed: 0.568 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.NullPointerException
+	at com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest.shouldNotSignUpForEmptyRequest(CustomerControllerTest.java:64)
+Caused by: java.lang.NullPointerException
+	at com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest.shouldNotSignUpForEmptyRequest(CustomerControllerTest.java:64)
+
+shouldNotLoginIfNoDataPresentForGivenMobileNo(com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest)  Time elapsed: 0.216 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Checked exception is invalid for this method!
+Invalid: com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException
+	at com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest.shouldNotLoginIfNoDataPresentForGivenMobileNo(CustomerControllerTest.java:175)
+
+shouldNotLoginForWrongPassword(com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest)  Time elapsed: 0.471 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Checked exception is invalid for this method!
+Invalid: com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException
+	at com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest.shouldNotLoginForWrongPassword(CustomerControllerTest.java:189)
+
