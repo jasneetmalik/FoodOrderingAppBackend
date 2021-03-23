@@ -6,8 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="2187793b-e64d-48fa-93dc-77d9c32a3738" name="Default" comment="Bug Fixes. Passed All 24 test cases for the CustomerController">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/FoodOrderingApp-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/FoodOrderingApp-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/controller/CategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/CategoryDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/CategoryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/CategoryEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/CategoryItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/CategoryItemEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/CategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/CategoryDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryItemEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryItemEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +237,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550834160886" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/FoodOrderingApp-api/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -235,11 +247,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jasne\Downloads\Trello_quora-master-final\FoodOrderingAppBackend\FoodOrderingApp-api\src\test\java\com\upgrad\FoodOrderingApp\api\controller" />
       <recent name="C:\Users\jasne\Downloads\Trello_quora-master-final\FoodOrderingAppBackend\FoodOrderingApp-api\src" />
       <recent name="C:\Users\razi.akram\Downloads\FoodOrderingAppBackend\FoodOrderingApp-api\src\test\java\com\upgrad\FoodOrderingApp\api\controller" />
       <recent name="C:\Users\razi.akram\Downloads\FoodOrderingAppBackend\FoodOrderingApp-api\src\main\resources\endpoints" />
       <recent name="C:\Users\razi.akram\Documents\FoodOrderingAppBackend\FoodOrderingApp-api\src\test\java\com\upgrad\FoodOrderingApp\api\controller" />
-      <recent name="C:\Users\Admin\Documents\FoodOrderingAppBackend\FoodOrderingApp-service\src\main\java\com\upgrad\FoodOrderingApp\service\exception" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Admin\Documents\FoodOrderingAppBackend\FoodOrderingApp-db\src\main\resources\config" />
@@ -255,7 +267,7 @@
       <recent name="com.upgrad.FoodOrderingApp.service.exception" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.FoodOrderingAppApiApplication">
+  <component name="RunManager" selected="JUnit.CategoryControllerTest">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -288,6 +300,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CategoryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FoodOrderingApp-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.upgrad.FoodOrderingApp.api.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.CategoryControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CustomerControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
@@ -315,23 +343,6 @@
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest" />
       <option name="METHOD_NAME" value="shouldNotSignUpForEmptyRequest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CustomerControllerTest.shouldNotSignUpIfTheContactIsAlreadySignedUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FoodOrderingApp-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.upgrad.FoodOrderingApp.api.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest" />
-      <option name="METHOD_NAME" value="shouldNotSignUpIfTheContactIsAlreadySignedUp" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
@@ -378,11 +389,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CategoryControllerTest" />
         <item itemvalue="Spring Boot.FoodOrderingAppApiApplication" />
         <item itemvalue="JUnit.CustomerControllerTest" />
         <item itemvalue="JUnit.CustomerControllerTest.shouldNotSignUpForEmptyRequest" />
         <item itemvalue="JUnit.All in FoodOrderingAppBackend" />
-        <item itemvalue="JUnit.CustomerControllerTest.shouldNotSignUpIfTheContactIsAlreadySignedUp" />
       </list>
     </recent_temporary>
   </component>
@@ -407,7 +418,7 @@
       <workItem from="1545232696710" duration="1008000" />
       <workItem from="1616139992275" duration="5864000" />
       <workItem from="1616148992162" duration="506000" />
-      <workItem from="1616166363141" duration="49129000" />
+      <workItem from="1616166363141" duration="64383000" />
     </task>
     <task id="LOCAL-00001" summary="Generated Customer, Address, Item, Restaurant related Entities.">
       <created>1616176593244</created>

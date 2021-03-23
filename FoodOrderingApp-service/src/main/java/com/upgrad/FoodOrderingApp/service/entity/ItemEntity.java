@@ -1,11 +1,14 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
+import com.upgrad.FoodOrderingApp.service.common.ItemType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="item")
+@NamedQueries({@NamedQuery(name="getItemById", query="SELECT i from ItemEntity i where i.id = :id")})
 public class ItemEntity {
 
     @Id
@@ -30,7 +33,7 @@ public class ItemEntity {
     @NotNull
     @Size(max=10)
     @Column(name="type")
-    private String type;
+    private ItemType type;
 
     //GETTERS AND SETTERS
     public Integer getId() {
@@ -65,11 +68,11 @@ public class ItemEntity {
         this.price = price;
     }
 
-    public String getType() {
+    public ItemType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ItemType type) {
         this.type = type;
     }
 }

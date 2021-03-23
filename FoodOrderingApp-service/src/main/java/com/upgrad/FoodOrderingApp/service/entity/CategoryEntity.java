@@ -1,6 +1,8 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 import javax.validation.constraints.NotNull;
@@ -31,7 +33,20 @@ public class CategoryEntity implements Serializable {
     @NotNull
     private String categoryName;
 
-   public Integer getId() {
+    @ManyToMany
+    @JoinTable(name = "category_item", joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<ItemEntity> items = new ArrayList<>();
+
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemEntity> items) {
+        this.items = items;
+    }
+
+    public Integer getId() {
         return id;
     }
 
