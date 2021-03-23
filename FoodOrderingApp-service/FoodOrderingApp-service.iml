@@ -6,7 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="FoodOrderingApp-service" />
+          <factory-entry name="FoodOrderingApp-service" value="72fb60c0-b2a4-4f9c-9897-464156bcb897" />
           <factory-entry name="entityManagerFactory" value="72fb60c0-b2a4-4f9c-9897-464156bcb897" />
         </datasource-mapping>
         <naming-strategy-map />

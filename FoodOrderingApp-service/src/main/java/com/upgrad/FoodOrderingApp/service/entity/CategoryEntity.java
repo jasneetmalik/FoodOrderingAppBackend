@@ -1,18 +1,20 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "category")
+
+@NamedQueries({
+        @NamedQuery(name = "getCategoryByUuid", query = "select q from CategoryEntity q where q.uuid = :uuid"),
+        @NamedQuery(name = "allCategories", query = "SELECT q FROM CategoryEntity q ORDER BY q.categoryName"),
+})
 
 public class CategoryEntity implements Serializable {
 
@@ -31,7 +33,20 @@ public class CategoryEntity implements Serializable {
     @NotNull
     private String categoryName;
 
-   public Integer getId() {
+    @ManyToMany
+    @JoinTable(name = "category_item", joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<ItemEntity> items = new ArrayList<>();
+
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemEntity> items) {
+        this.items = items;
+    }
+
+    public Integer getId() {
         return id;
     }
 
