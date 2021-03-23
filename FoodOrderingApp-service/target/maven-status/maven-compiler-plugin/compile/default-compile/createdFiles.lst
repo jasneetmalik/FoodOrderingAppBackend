@@ -11,12 +11,14 @@ com\upgrad\FoodOrderingApp\service\exception\UpdateCustomerException.class
 com\upgrad\FoodOrderingApp\service\entity\ItemEntity.class
 com\upgrad\FoodOrderingApp\service\exception\SignUpRestrictedException.class
 com\upgrad\FoodOrderingApp\service\exception\SaveAddressException.class
+com\upgrad\FoodOrderingApp\service\dao\AddressRepository.class
 com\upgrad\FoodOrderingApp\service\exception\AuthorizationFailedException.class
 com\upgrad\FoodOrderingApp\service\dao\CustomerRepository.class
 com\upgrad\FoodOrderingApp\service\exception\CategoryNotFoundException.class
 com\upgrad\FoodOrderingApp\service\entity\CategoryEntity.class
 com\upgrad\FoodOrderingApp\service\entity\StateEntity.class
 com\upgrad\FoodOrderingApp\service\exception\CustomerNotFoundException.class
+com\upgrad\FoodOrderingApp\service\businness\AddressService.class
 com\upgrad\FoodOrderingApp\service\entity\RestaurantItemEntity.class
 com\upgrad\FoodOrderingApp\service\entity\CustomerAddressEntity.class
 com\upgrad\FoodOrderingApp\service\entity\RestaurantEntity.class

@@ -74,6 +74,7 @@ public class CustomerService {
     }
 
 // ************Authenticate using Contact Number and Password **********
+@Transactional(propagation = Propagation.REQUIRED)
     public CustomerAuthEntity authenticate(String contact, String password) throws AuthenticationFailedException {
         //Check is Contact Exists
         CustomerEntity registeredCustomer = customerRepository.checkContact(contact);

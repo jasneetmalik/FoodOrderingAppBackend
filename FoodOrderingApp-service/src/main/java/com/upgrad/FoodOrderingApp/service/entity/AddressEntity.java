@@ -18,7 +18,7 @@ public class AddressEntity implements Serializable {
     @Column(name = "uuid")
     @NotNull
     @Size(max = 200)
-    private int uuid;
+    private String uuid;
 
     @Column(name = "flat_buil_number")
     @Size(max = 255)
@@ -33,8 +33,7 @@ public class AddressEntity implements Serializable {
     private String city;
 
     @Column(name = "pincode")
-    @Size(max = 30)
-    private int pincode;
+    private String pincode;
 
     //REFERENCES STATE TABLE
     @ManyToOne(fetch = FetchType.EAGER)
@@ -54,11 +53,11 @@ public class AddressEntity implements Serializable {
         this.id = id;
     }
 
-    public int getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(int uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
@@ -86,11 +85,11 @@ public class AddressEntity implements Serializable {
         this.city = city;
     }
 
-    public int getPincode() {
+    public String getPincode() {
         return pincode;
     }
 
-    public void setPincode(int pincode) {
+    public void setPincode(String pincode) {
         this.pincode = pincode;
     }
 

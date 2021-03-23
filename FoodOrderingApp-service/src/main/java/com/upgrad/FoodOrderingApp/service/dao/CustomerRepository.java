@@ -47,6 +47,7 @@ public class CustomerRepository {
     public CustomerAuthEntity findCustomerAuthByAccessToken(final String accessToken) {
         final CustomerAuthEntity loggedInCustomerAuth;
         try {
+
             loggedInCustomerAuth = entityManager
                     .createNamedQuery("getCustomerAuthByToken", CustomerAuthEntity.class)
                     .setParameter("authentication", accessToken).getSingleResult();
