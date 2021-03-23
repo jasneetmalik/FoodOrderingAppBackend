@@ -203,4 +203,5 @@ public class CustomerService {
         newCustomer.setSalt(encryptedData[0]);
         newCustomer.setPassword(encryptedData[1]);
     }
+
 }
