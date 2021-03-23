@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="FoodOrderingApp-api/Hibernate" uuid="72fb60c0-b2a4-4f9c-9897-464156bcb897">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

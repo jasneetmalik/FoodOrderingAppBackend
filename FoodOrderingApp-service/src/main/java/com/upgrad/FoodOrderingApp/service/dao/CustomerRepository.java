@@ -8,18 +8,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-
 @Repository
 public class CustomerRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-
-    public CustomerEntity createUser(CustomerEntity user) {
-        entityManager.persist(user);
-        return user;
+//Create Customer using Signup Endpoint
+    public CustomerEntity createCustomer(CustomerEntity customer) {
+        entityManager.persist(customer);
+        return customer;
     }
-
+//Check if ContactNumber exists in Database
     public CustomerEntity checkContact(String contact) {
         try {
             return entityManager.createNamedQuery("getCustomerByContact", CustomerEntity.class).setParameter("contact", contact).getSingleResult();
@@ -29,7 +28,7 @@ public class CustomerRepository {
             return null;
         }
     }
-
+//Check Password
     public CustomerEntity checkPassword(String password) {
         try {
             return entityManager.createNamedQuery("getCustomerByPassword", CustomerEntity.class).setParameter("password", password).getSingleResult();
@@ -38,19 +37,33 @@ public class CustomerRepository {
             return null;
         }
     }
-
-    public boolean authenticate(String contact, String password) {
-        try {
-            entityManager.createNamedQuery("getCustomerByContactAndPassword", CustomerEntity.class).setParameter("contact", contact).setParameter("password", password).getSingleResult();
-            return true;
-        }
-        catch (NoResultException noResultException) {
-            return false;
-        }
-    }
-
+//Save Authentication details to Customer Auth table
     public CustomerAuthEntity saveAuth(CustomerAuthEntity customerAuthEntity) {
         entityManager.persist(customerAuthEntity);
         return customerAuthEntity;
     }
+
+//Check if a customer exists in CustomerAuth table for the specified Access Token
+    public CustomerAuthEntity findCustomerAuthByAccessToken(final String accessToken) {
+        final CustomerAuthEntity loggedInCustomerAuth;
+        try {
+            loggedInCustomerAuth = entityManager
+                    .createNamedQuery("getCustomerAuthByToken", CustomerAuthEntity.class)
+                    .setParameter("authentication", accessToken).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+        return loggedInCustomerAuth;
+    }
+//Update Authentication Details in CustomerAuth table
+public CustomerAuthEntity update(CustomerAuthEntity customerAuthEntity) {
+    entityManager.merge(customerAuthEntity);
+    return customerAuthEntity;
+}
+//Update Customer
+    public CustomerEntity updateCustomer(CustomerEntity customer) {
+        entityManager.merge(customer);
+        return customer;
+    }
+
 }

@@ -5,12 +5,19 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="FoodOrderingApp-service" />
+          <factory-entry name="entityManagerFactory" value="72fb60c0-b2a4-4f9c-9897-464156bcb897" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/com/upgrad/FoodOrderingApp/service/ServiceConfiguration.java</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
@@ -75,5 +82,9 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.postgresql:postgresql:42.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.mockito:mockito-core:2.22.0" level="project" />
+    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.7.11" level="project" />
+    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy-agent:1.7.11" level="project" />
+    <orderEntry type="library" name="Maven: org.objenesis:objenesis:2.6" level="project" />
   </component>
 </module>

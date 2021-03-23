@@ -51,7 +51,7 @@ public class CustomerControllerTest {
         mockMvc
                 .perform(post("/customer/signup")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                        .content("{\"first_name\":\"first\", \"last_name\":\"last\", \"email_address\":\"abc@email.com\", \"contact_number\":\"9090909090\", \"password\":\"Qawsedrf@123\"}"))
+                        .content("{\"first_name\":\"first\", \"last_name\":\"last\", \"email_address\":\"abc@email.com\", \"contact_number\":\"9090909090\", \"password\":\"qawsedrf@123\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").value(customerId));
         verify(mockCustomerService, times(1)).saveCustomer(any());
@@ -129,6 +129,7 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("code").value("SGR-001"));
         verify(mockCustomerService, times(1)).saveCustomer(any());
     }
+
     // ----------------------------- POST /customer/login --------------------------------
 
     //This test case passes when you are able to login successfully.
@@ -289,9 +290,9 @@ public class CustomerControllerTest {
         verify(mockCustomerService, times(1)).getCustomer("auth");
         verify(mockCustomerService, times(1)).updateCustomer(customerEntity);
     }
-
-    //This test case passes when you have handled the exception of trying to update user details but the first name
-    // field is empty.
+//
+//    //This test case passes when you have handled the exception of trying to update user details but the first name
+//    // field is empty.
     @Test
     public void shouldNotUpdateCustomerDetailsIfFirstNameNotPresentInTheRequest() throws Exception {
         mockMvc
@@ -322,9 +323,9 @@ public class CustomerControllerTest {
         verify(mockCustomerService, times(1)).getCustomer("auth");
         verify(mockCustomerService, times(0)).updateCustomer(any());
     }
-
-    //This test case passes when you have handled the exception of trying to update customer details while you are
-    // already logged out.
+//
+//    //This test case passes when you have handled the exception of trying to update customer details while you are
+//    // already logged out.
     @Test
     public void shouldUpdateCustomerDetailsIfCustomerIsAlreadyLoggedOut() throws Exception {
         when(mockCustomerService.getCustomer("auth"))
@@ -483,4 +484,5 @@ public class CustomerControllerTest {
         verify(mockCustomerService, times(1)).updateCustomerPassword("oldPwd", "newPwd", customerEntity);
     }
 
-}*/
+}
+*/

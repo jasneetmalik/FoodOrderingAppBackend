@@ -2,7 +2,13 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/com/upgrad/FoodOrderingApp/api/config/SwaggerConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/upgrad/FoodOrderingApp/api/FoodOrderingAppApiApplication.java</file>
+          <file>file://$MODULE_DIR$/target/generated-sources/io/swagger/Swagger2SpringBoot.java</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>
@@ -18,7 +24,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="FoodOrderingApp-api" value="72fb60c0-b2a4-4f9c-9897-464156bcb897" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -91,7 +99,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.2.16.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.javassist:javassist:3.22.0-GA" level="project" />
     <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
     <orderEntry type="library" name="Maven: org.jboss:jandex:2.0.3.Final" level="project" />
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
@@ -116,10 +123,6 @@
     <orderEntry type="library" name="Maven: org.ow2.asm:asm:5.0.4" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.assertj:assertj-core:3.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.mockito:mockito-core:2.15.0" level="project" />
-    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.7.11" level="project" />
-    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy-agent:1.7.11" level="project" />
-    <orderEntry type="library" name="Maven: org.objenesis:objenesis:2.6" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-library:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.skyscreamer:jsonassert:1.5.0" level="project" />
@@ -128,6 +131,9 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.xmlunit:xmlunit-core:2.5.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.27.0-GA" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.0.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.6" level="project" />
@@ -137,5 +143,9 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.postgresql:postgresql:42.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.mockito:mockito-core:2.22.0" level="project" />
+    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.7.11" level="project" />
+    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy-agent:1.7.11" level="project" />
+    <orderEntry type="library" name="Maven: org.objenesis:objenesis:2.6" level="project" />
   </component>
 </module>

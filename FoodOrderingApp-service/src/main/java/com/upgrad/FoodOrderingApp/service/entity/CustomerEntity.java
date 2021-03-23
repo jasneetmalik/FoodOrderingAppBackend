@@ -1,6 +1,8 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "customer")
@@ -16,24 +18,37 @@ public class CustomerEntity {
     private Integer id;
 
     @Column(name = "uuid")
+    @NotNull
+    @Size(max=200)
     private String uuid;
 
     @Column(name = "firstname")
+    @NotNull
+    @Size(max = 30)
     private String firstName;
 
     @Column(name = "lastname")
+    @Size(max = 30)
     private String lastName;
 
     @Column(name = "email")
+    @Size(max = 50)
+    @NotNull
     private String email;
 
     @Column(name = "password")
+    @NotNull
+    @Size(max=255)
     private String password;
 
     @Column(name = "contact_number")
+    @NotNull
+    @Size(max=255)
     private String contactNumber;
 
     @Column(name = "salt")
+    @NotNull
+    @Size(max = 255)
     private String salt;
 
     public Integer getId() {
