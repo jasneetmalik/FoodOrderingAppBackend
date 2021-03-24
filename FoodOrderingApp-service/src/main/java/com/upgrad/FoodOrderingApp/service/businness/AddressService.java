@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -49,6 +51,13 @@ public class AddressService {
         customerAddressEntity.setAddress(addressEntity);
         repository.saveCustomerAddressEntity(customerAddressEntity);
         return addressEntity;
+
+    }
+
+    public List<AddressEntity> getAllAddress(CustomerEntity customer) {
+
+       return repository.getAllAddress(customer);
+
 
     }
 }

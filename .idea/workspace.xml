@@ -7,14 +7,14 @@
     <list default="true" id="352f5cc2-1393-46f4-9ebc-1b7ceb07b724" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/AddressControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/AddressControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/controller/AddressController.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/controller/AddressController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/exception/RestExceptionHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/target/test-classes/com/upgrad/FoodOrderingApp/api/controller/AddressControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/target/test-classes/com/upgrad/FoodOrderingApp/api/controller/AddressControllerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CustomerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CustomerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/AddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/CustomerAddressEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/CustomerAddressEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/AddressService.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/AddressService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/AddressRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/AddressRepository.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,7 +304,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTest.shouldNotSaveAddressWithEmptyAddressField" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AddressControllerTest.shouldGetAllAddresses" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
         <pattern>
@@ -314,14 +314,14 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.AddressControllerTest" />
-      <option name="METHOD_NAME" value="shouldNotSaveAddressWithEmptyAddressField" />
+      <option name="METHOD_NAME" value="shouldGetAllAddresses" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTest.shouldNotSaveAddressWithEmptyWrongPinCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AddressControllerTest.shouldNotGetAllAddressesWithExpiredSessionUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
         <pattern>
@@ -331,14 +331,14 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.AddressControllerTest" />
-      <option name="METHOD_NAME" value="shouldNotSaveAddressWithEmptyWrongPinCode" />
+      <option name="METHOD_NAME" value="shouldNotGetAllAddressesWithExpiredSessionUser" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTest.shouldNotSaveAddressWithIncorrectStateId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AddressControllerTest.shouldNotGetAllAddressesWithNonExistingAccessToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
         <pattern>
@@ -348,14 +348,14 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.AddressControllerTest" />
-      <option name="METHOD_NAME" value="shouldNotSaveAddressWithIncorrectStateId" />
+      <option name="METHOD_NAME" value="shouldNotGetAllAddressesWithNonExistingAccessToken" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTest.shouldSaveAddress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AddressControllerTest.shouldNotGetAllAddressesWithSignedOutUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
         <pattern>
@@ -365,7 +365,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.AddressControllerTest" />
-      <option name="METHOD_NAME" value="shouldSaveAddress" />
+      <option name="METHOD_NAME" value="shouldNotGetAllAddressesWithSignedOutUser" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
@@ -400,10 +400,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.AddressControllerTest" />
-        <item itemvalue="JUnit.AddressControllerTest.shouldSaveAddress" />
-        <item itemvalue="JUnit.AddressControllerTest.shouldNotSaveAddressWithEmptyWrongPinCode" />
-        <item itemvalue="JUnit.AddressControllerTest.shouldNotSaveAddressWithEmptyAddressField" />
-        <item itemvalue="JUnit.AddressControllerTest.shouldNotSaveAddressWithIncorrectStateId" />
+        <item itemvalue="JUnit.AddressControllerTest.shouldNotGetAllAddressesWithExpiredSessionUser" />
+        <item itemvalue="JUnit.AddressControllerTest.shouldNotGetAllAddressesWithSignedOutUser" />
+        <item itemvalue="JUnit.AddressControllerTest.shouldNotGetAllAddressesWithNonExistingAccessToken" />
+        <item itemvalue="JUnit.AddressControllerTest.shouldGetAllAddresses" />
       </list>
     </recent_temporary>
   </component>
@@ -431,7 +431,7 @@
       <workItem from="1616166363141" duration="45777000" />
       <workItem from="1616498706551" duration="13118000" />
       <workItem from="1616523801811" duration="2335000" />
-      <workItem from="1616573230660" duration="2257000" />
+      <workItem from="1616573230660" duration="9855000" />
     </task>
     <task id="LOCAL-00001" summary="Generated Customer, Address, Item, Restaurant related Entities.">
       <created>1616176593244</created>

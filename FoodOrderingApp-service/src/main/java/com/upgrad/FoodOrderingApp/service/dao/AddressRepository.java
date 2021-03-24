@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository
@@ -33,5 +35,23 @@ public class AddressRepository {
     public CustomerAddressEntity saveCustomerAddressEntity(CustomerAddressEntity customerAddressEntity) {
         entityManager.persist(customerAddressEntity);
         return customerAddressEntity;
+    }
+
+    public List<AddressEntity> getAllAddress(CustomerEntity customer) {
+        CustomerAddressEntity customerAddressEntity = null;
+        List<CustomerAddressEntity> customerAddressEntities;
+        try {
+            customerAddressEntities = entityManager.createNamedQuery("getEntityByCustomer", CustomerAddressEntity.class).setParameter("customer", customer).getResultList();
+        }
+        catch (Exception e) {
+            return null;
+        }
+        List<AddressEntity> addressEntityList = new ArrayList<>();
+        for (int i = 0; i < customerAddressEntities.size(); i++){
+            addressEntityList.add(customerAddressEntities.get(i).getAddress());
+        }
+
+        return addressEntityList;
+
     }
 }
