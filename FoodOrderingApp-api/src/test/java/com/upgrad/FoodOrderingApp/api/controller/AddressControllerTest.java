@@ -66,9 +66,9 @@ public class AddressControllerTest {
                         .header("authorization", "Bearer database_accesstoken2")
                         .content("{\"flat_building_name\":\"xyz\", \"locality\":\"abc\", \"city\":\"pqr\", \"pincode\":\"123456\", \"state_uuid\":\"testUUID\"}"))
                 .andExpect(status().isCreated())
-                //.andExpect(jsonPath("id").value("randomUuid001"))
+                .andExpect(jsonPath("id").value("randomUuid001"))
                 .andExpect(jsonPath("status").value("ADDRESS SUCCESSFULLY REGISTERED"));
-        verify(mockCustomerService, times(1)).getCustomer("Bearer database_accesstoken2");
+        verify(mockCustomerService, times(1)).getCustomer("database_accesstoken2");
         verify(mockAddressService, times(1)).getStateByUUID("testUUID");
         verify(mockAddressService, times(1)).saveAddress(any(), any());
     }
@@ -100,7 +100,8 @@ public class AddressControllerTest {
         mockMvc
                 .perform(post("/address?content=my_address")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                        .header("authorization", "Bearer database_accesstoken"))
+                        .header("authorization", "Bearer database_accesstoken")
+                        .content("{\"flat_building_name\":\"xyz\", \"locality\":\"abc\", \"city\":\"pqr\", \"pincode\":\"123456\", \"state_uuid\":\"testUUID\"}"))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("code").value("ATHR-002"));
         verify(mockCustomerService, times(1)).getCustomer("database_accesstoken");
@@ -118,7 +119,7 @@ public class AddressControllerTest {
         mockMvc
                 .perform(post("/address?content=my_address")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                        .header("authorization", "Bearer database_accesstoken1"))
+                        .header("authorization", "Bearer database_accesstoken1").content("{\"flat_building_name\":\"xyz\", \"locality\":\"abc\", \"city\":\"pqr\", \"pincode\":\"123456\", \"state_uuid\":\"testUUID\"}"))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("code").value("ATHR-003"));
         verify(mockCustomerService, times(1)).getCustomer("database_accesstoken1");

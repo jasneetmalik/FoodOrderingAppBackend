@@ -144,10 +144,12 @@ public class CustomerService {
         return updatedCustomer;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public CustomerEntity getCustomer(final String accessToken) throws AuthorizationFailedException {
+
+    public CustomerEntity getCustomer(final String token) throws AuthorizationFailedException {
         // Get the customer details based on access token
-        CustomerAuthEntity customerAuth = customerRepository.findCustomerAuthByAccessToken(accessToken);
+
+        CustomerAuthEntity customerAuth = customerRepository.findCustomerAuthByAccessToken(token);
+        System.out.println("Y????????????????????????????????????????????" + customerAuth);
         final ZonedDateTime now;
         // Validates if customer is logged in
         if (customerAuth == null) {

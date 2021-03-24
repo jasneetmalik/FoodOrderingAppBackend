@@ -29,23 +29,21 @@ public class AddressController {
     @Autowired
     AddressService addressService;
     @RequestMapping(path = "/address", produces = APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
-    public ResponseEntity<SaveAddressResponse> saveAddress(@RequestHeader("authorization") String token, @RequestBody()SaveAddressRequest saveAddressRequest) throws AuthorizationFailedException, SaveAddressException, AddressNotFoundException {
+    public ResponseEntity<SaveAddressResponse> save(@RequestHeader("authorization") String token, @RequestBody()SaveAddressRequest saveAddressRequest) throws SaveAddressException, AuthorizationFailedException, AddressNotFoundException {
+        final String[] bearerTokens = token.split("Bearer ");
+        final String accessToken;
+        if (bearerTokens.length == 2) {
+            accessToken = bearerTokens[1];
+        } else {
+            accessToken = token;
+        }
 
-        CustomerEntity customer = customerService.getCustomer(token);
+        CustomerEntity customer = customerService.getCustomer(accessToken);
+        if(Utility.isNullOrEmpty(customer)) {
+            throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
+        }
         AddressEntity addressEntity = new AddressEntity();
-        if(Utility.isNullOrEmpty(saveAddressRequest.getCity()) || Utility.isNullOrEmpty(saveAddressRequest.getLocality()) || Utility.isNullOrEmpty(saveAddressRequest.getPincode())  || Utility.isNullOrEmpty(saveAddressRequest.getFlatBuildingName()) || Utility.isNullOrEmpty(saveAddressRequest.getStateUuid())) {
-            throw new SaveAddressException("SAR-001", "No field can be empty");
-        }
 
-        if((saveAddressRequest.getPincode().length() != 6)) {
-            throw new SaveAddressException("SAR-002","Invalid pincode");
-        }
-        try {
-            Integer.parseInt(saveAddressRequest.getPincode());
-        }
-        catch (Exception e) {
-            throw new SaveAddressException("SAR-002","Invalid pincode");
-        }
         StateEntity stateEntity = null;
             stateEntity = addressService.getStateByUUID(saveAddressRequest.getStateUuid());
 
@@ -56,7 +54,7 @@ public class AddressController {
         addressEntity.setStateId(stateEntity);
         addressEntity.setUuid(UUID.randomUUID().toString());
 
-            addressService.saveAddress(customer, addressEntity);
+            addressEntity = addressService.saveAddress(customer, addressEntity);
 
         SaveAddressResponse saveAddressResponse = new SaveAddressResponse();
         saveAddressResponse.setId(addressEntity.getUuid());

@@ -6,10 +6,12 @@ import com.upgrad.FoodOrderingApp.service.entity.CustomerAddressEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
 import com.upgrad.FoodOrderingApp.service.entity.StateEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AddressNotFoundException;
+import com.upgrad.FoodOrderingApp.service.exception.SaveAddressException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.UUID;
 
@@ -27,7 +29,20 @@ public class AddressService {
     else return stateEntity;
     }
     @Transactional(propagation = Propagation.REQUIRED)
-    public AddressEntity saveAddress(CustomerEntity customerEntity, AddressEntity addressEntity) {
+    public AddressEntity saveAddress(CustomerEntity customerEntity, AddressEntity addressEntity) throws SaveAddressException {
+        if((addressEntity.getCity().isEmpty()) || (addressEntity.getLocality().isEmpty()) || (addressEntity.getPincode().isEmpty())  || (addressEntity.getFlatBuilNumber().isEmpty())) {
+            throw new SaveAddressException("SAR-001", "No field can be empty");
+        }
+
+        if((addressEntity.getPincode().length() != 6)) {
+            throw new SaveAddressException("SAR-002","Invalid pincode");
+        }
+        try {
+            Integer.parseInt(addressEntity.getPincode());
+        }
+        catch (Exception e) {
+            throw new SaveAddressException("SAR-002","Invalid pincode");
+        }
         CustomerAddressEntity customerAddressEntity = new CustomerAddressEntity();
         customerAddressEntity.setCustomer(customerEntity);
         addressEntity = repository.saveAddress(customerEntity, addressEntity);
