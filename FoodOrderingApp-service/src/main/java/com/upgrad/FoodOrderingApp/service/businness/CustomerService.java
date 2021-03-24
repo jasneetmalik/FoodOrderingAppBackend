@@ -29,7 +29,7 @@ public class CustomerService {
     @Autowired
     private PasswordCryptographyProvider passwordCryptographyProvider;
 
-    // ************** SAVE CUSTOMER *************************
+    // ****************************** SAVE CUSTOMER ***********************************************************
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerEntity saveCustomer(CustomerEntity customer) throws SignUpRestrictedException, AuthenticationFailedException {
 
@@ -74,7 +74,7 @@ public class CustomerService {
 
     }
 
-// ************Authenticate using Contact Number and Password **********
+// ************Authenticate using Contact Number and Password ************************************************
     public CustomerAuthEntity authenticate(String contact, String password) throws AuthenticationFailedException {
         //Check is Contact Exists
         CustomerEntity registeredCustomer = customerRepository.checkContact(contact);
@@ -100,7 +100,7 @@ public class CustomerService {
             throw new AuthenticationFailedException("ATH-002", "Invalid Credentials");
         }
     }
-// ********** Save Customer Authentication Details
+// ********** Save Customer Authentication Details ****************************************************
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerAuthEntity saveAuth(CustomerAuthEntity customerAuthEntity) {
         return customerRepository.saveAuth(customerAuthEntity);
@@ -143,7 +143,7 @@ public class CustomerService {
         CustomerEntity updatedCustomer = customerRepository.updateCustomer(customer);
         return updatedCustomer;
     }
-
+    //***** GET CUSTOMER (USED BY ALL ENDPOINTS REQUIRING AUTHENTICATION USING ACCESS TOKEN) ***********
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerEntity getCustomer(final String accessToken) throws AuthorizationFailedException {
         // Get the customer details based on access token
@@ -155,14 +155,12 @@ public class CustomerService {
         }
         // Validates if customer has logged out
         if (customerAuth.getLogoutAt() != null) {
-            throw new AuthorizationFailedException("ATHR-002",
-                    "Customer is logged out. Log in again to access this endpoint.");
+            throw new AuthorizationFailedException("ATHR-002","Customer is logged out. Log in again to access this endpoint.");
         }
         now = ZonedDateTime.now(ZoneId.systemDefault());
         // Verifies if customer session has expired
         if (customerAuth.getExpiresAt().isBefore(now) || customerAuth.getExpiresAt().isEqual(now)) {
-            throw new AuthorizationFailedException("ATHR-003",
-                    "Your session is expired. Log in again to access this endpoint.");
+            throw new AuthorizationFailedException("ATHR-003","Your session is expired. Log in again to access this endpoint.");
         }
         return customerAuth.getCustomer();
     }

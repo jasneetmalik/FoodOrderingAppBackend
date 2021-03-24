@@ -52,7 +52,7 @@ public class CategoryController {
 
             //Get Category By Id
             CategoryEntity categoryById = categoryService.getCategoryById(categoryId);
-            
+
             //Create Response
             CategoryDetailsResponse categoryDetailsResponse = new CategoryDetailsResponse()
                     .id(UUID.fromString(categoryById.getUuid()))
