@@ -1,9 +1,18 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "restaurant_item")
+@NamedQueries(
+        {
+                @NamedQuery(name = "restaurantItemById", query = "select r from RestaurantItemEntity r where r.id=:id")
+        }
+)
+
 public class RestaurantItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,10 +20,12 @@ public class RestaurantItemEntity {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "item_id")
     private ItemEntity itemId;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="restaurant_id")
     private RestaurantEntity restaurantId;
 

@@ -4,6 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="restaurant_category")
+@NamedQueries(
+        {
+                @NamedQuery(name = "restaurantsByCategoryId", query = "select r from RestaurantCategoryEntity r where r.category.id=:id")
+        }
+)
 
 public class RestaurantCategoryEntity {
     @Id
