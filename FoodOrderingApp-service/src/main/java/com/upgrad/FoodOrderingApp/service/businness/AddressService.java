@@ -6,16 +6,14 @@ import com.upgrad.FoodOrderingApp.service.entity.CustomerAddressEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
 import com.upgrad.FoodOrderingApp.service.entity.StateEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AddressNotFoundException;
+import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SaveAddressException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
 
 @Service
 public class AddressService {
@@ -56,8 +54,24 @@ public class AddressService {
 
     public List<AddressEntity> getAllAddress(CustomerEntity customer) {
 
+
        return repository.getAllAddress(customer);
 
 
+    }
+
+
+    public void getAddressByUUID(String uuid, CustomerEntity customerEntity) throws AddressNotFoundException, AuthorizationFailedException {
+
+        if(uuid.isEmpty()) {
+            throw new AddressNotFoundException("ANF-005", "Address id can not be empty");
+        }
+        AddressEntity addressEntity =repository.getAddress(uuid, customerEntity);
+       deleteAddress(addressEntity);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteAddress(AddressEntity addressEntity) {
+        repository.deleteAddress(addressEntity);
     }
 }
