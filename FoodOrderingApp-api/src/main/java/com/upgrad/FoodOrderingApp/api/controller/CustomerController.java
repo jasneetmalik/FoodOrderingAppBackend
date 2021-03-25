@@ -70,6 +70,7 @@ public class CustomerController {
     // ********************************* SIGNIN *************************************************************
     @RequestMapping(method = POST, path = "/customer/login", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<LoginResponse> signin(@RequestHeader(name = "authorization") String authorization) throws AuthenticationFailedException {
+
         final String username;
         final String password;
         final String[] decodedCredentials;
@@ -186,6 +187,5 @@ public class CustomerController {
             .id(updatedCustomer.getUuid())
             .status("CUSTOMER PASSWORD UPDATED SUCCESSFULLY");
     return new ResponseEntity<UpdatePasswordResponse>(updatePasswordResponse, HttpStatus.OK);
-}
-
+    }
 }

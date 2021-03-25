@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import com.upgrad.FoodOrderingApp.service.businness.PasswordCryptographyProvider;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -74,7 +73,12 @@ public class CustomerService {
 
     }
 
+<<<<<<< HEAD
+// ************Authenticate using Contact Number and Password **********
+@Transactional(propagation = Propagation.REQUIRED)
+=======
 // ************Authenticate using Contact Number and Password ************************************************
+>>>>>>> master
     public CustomerAuthEntity authenticate(String contact, String password) throws AuthenticationFailedException {
         //Check is Contact Exists
         CustomerEntity registeredCustomer = customerRepository.checkContact(contact);
@@ -143,11 +147,19 @@ public class CustomerService {
         CustomerEntity updatedCustomer = customerRepository.updateCustomer(customer);
         return updatedCustomer;
     }
+<<<<<<< HEAD
+
+
+    public CustomerEntity getCustomer(final String token) throws AuthorizationFailedException {
+=======
     //***** GET CUSTOMER (USED BY ALL ENDPOINTS REQUIRING AUTHENTICATION USING ACCESS TOKEN) ***********
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerEntity getCustomer(final String accessToken) throws AuthorizationFailedException {
+>>>>>>> master
         // Get the customer details based on access token
-        CustomerAuthEntity customerAuth = customerRepository.findCustomerAuthByAccessToken(accessToken);
+
+        CustomerAuthEntity customerAuth = customerRepository.findCustomerAuthByAccessToken(token);
+        System.out.println("Y????????????????????????????????????????????" + customerAuth);
         final ZonedDateTime now;
         // Validates if customer is logged in
         if (customerAuth == null) {
@@ -163,6 +175,7 @@ public class CustomerService {
             throw new AuthorizationFailedException("ATHR-003","Your session is expired. Log in again to access this endpoint.");
         }
         return customerAuth.getCustomer();
+
     }
 
     // ************ UPDATE PASSWORD ************************
@@ -201,4 +214,5 @@ public class CustomerService {
         newCustomer.setSalt(encryptedData[0]);
         newCustomer.setPassword(encryptedData[1]);
     }
+
 }
