@@ -105,7 +105,7 @@ public class AddressController {
     }
 
 
-    @RequestMapping(path = "/address/delete/{addressId}", produces = APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.DELETE)
+    @RequestMapping(path = "/address/{addressId}", produces = APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.DELETE)
     public ResponseEntity<DeleteAddressResponse> deleteAddress(@PathVariable("addressId") String uuid, @RequestHeader("authorization") String token) throws AuthorizationFailedException, AddressNotFoundException {
         final String[] bearerTokens = token.split("Bearer ");
         final String accessToken;
@@ -119,10 +119,11 @@ public class AddressController {
         if(Utility.isNullOrEmpty(customer)) {
             throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
         }
-        addressService.getAddressByUUID(uuid, customer);
+        AddressEntity addressEntity = addressService.getAddressByUUID(uuid, customer);
+        addressEntity = addressService.deleteAddress(addressEntity);
 
         DeleteAddressResponse deleteAddressResponse = new DeleteAddressResponse();
-        deleteAddressResponse.setId(UUID.fromString(uuid));
+        deleteAddressResponse.setId(UUID.fromString(addressEntity.getUuid()));
         deleteAddressResponse.setStatus("ADDRESS DELETED SUCCESSFULLY");
 
         return new ResponseEntity<>(deleteAddressResponse, HttpStatus.OK);
