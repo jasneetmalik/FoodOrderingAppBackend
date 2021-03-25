@@ -1,2 +1,8 @@
+com\upgrad\FoodOrderingApp\api\controller\PaymentController.class
 com\upgrad\FoodOrderingApp\api\controller\CustomerControllerTest.class
+<<<<<<< HEAD
 com\upgrad\FoodOrderingApp\api\controller\AddressControllerTest.class
+=======
+com\upgrad\FoodOrderingApp\api\controller\OrderControllerTest.class
+com\upgrad\FoodOrderingApp\api\controller\CategoryControllerTest.class
+>>>>>>> master

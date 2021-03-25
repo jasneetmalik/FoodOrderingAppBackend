@@ -37,6 +37,18 @@ public class RestExceptionHandler {
                 .code(exc.getCode())
                 .message(exc.getErrorMessage()), HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ErrorResponse> categoryNotFoundException(CategoryNotFoundException exc, WebRequest request) {
+        return new ResponseEntity<ErrorResponse>(new ErrorResponse()
+                .code(exc.getCode())
+                .message(exc.getErrorMessage()), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(CouponNotFoundException.class)
+    public ResponseEntity<ErrorResponse> couponNotFoundException(CouponNotFoundException exc, WebRequest request) {
+        return new ResponseEntity<ErrorResponse>(new ErrorResponse()
+            .code(exc.getCode())
+            .message(exc.getErrorMessage()), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(SaveAddressException.class)
     public ResponseEntity<ErrorResponse> saveAddressException (SaveAddressException exc, WebRequest request){
