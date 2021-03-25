@@ -79,4 +79,8 @@ public class AddressService {
         addressEntity1.setUuid(UUID.randomUUID().toString());
         return addressEntity1;
     }
+
+    public List<StateEntity> getAllStates() {
+        return repository.getAllStates();
+    }
 }

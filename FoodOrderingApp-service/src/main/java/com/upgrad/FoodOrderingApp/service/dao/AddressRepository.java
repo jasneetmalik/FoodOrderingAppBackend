@@ -91,4 +91,15 @@ public class AddressRepository {
     public void deleteAddress(AddressEntity addressEntity) {
             entityManager.remove(addressEntity);
     }
+
+    public List<StateEntity> getAllStates() {
+        List<StateEntity> stateEntities = new ArrayList<>();
+        try {
+            stateEntities = entityManager.createNamedQuery("getAllStates", StateEntity.class).getResultList();
+            return stateEntities;
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
 }

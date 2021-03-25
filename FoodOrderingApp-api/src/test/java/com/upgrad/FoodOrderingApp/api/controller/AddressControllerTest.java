@@ -399,41 +399,43 @@ public class AddressControllerTest {
                 .andExpect(jsonPath("code").value("ATHR-003"));
         verify(mockCustomerService, times(1)).getCustomer("database_accesstoken1");
         verify(mockAddressService, times(0)).getAllAddress(any());
-    }}
+    }
 
-//    // ------------------------------------------ GET /states ------------------------------------------
-//
-//    //This test case passes when you are able to fetch the list of all available states.
-//    @Test
-//    public void shouldGetAllStates() throws Exception {
-//        final String stateUuid = UUID.randomUUID().toString();
-//        final StateEntity stateEntity = new StateEntity(stateUuid, "stateName");
-//        when(mockAddressService.getAllStates()).thenReturn(Collections.singletonList(stateEntity));
-//
-//        final String response = mockMvc
-//                .perform(get("/states").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//                .andExpect(status().isOk())
-//                .andReturn().getResponse().getContentAsString();
-//
-//        final StatesListResponse statesLists = new ObjectMapper().readValue(response, StatesListResponse.class);
-//        assertEquals(statesLists.getStates().size(), 1);
-//
-//        final StatesList statesList = statesLists.getStates().get(0);
-//        assertEquals(statesList.getId().toString(), stateUuid);
-//        assertEquals(statesList.getStateName(), "stateName");
-//    }
-//
-//    //This test case passes when you are not able to retrive any states if there are no states saved in the database.
-//    @Test
-//    public void shouldNotGetAllStatesIfNonePresentInDb() throws Exception {
-//        when(mockAddressService.getAllStates()).thenReturn(Collections.emptyList());
-//
-//        final String response = mockMvc
-//                .perform(get("/states").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//                .andExpect(status().isOk())
-//                .andReturn().getResponse().getContentAsString();
-//
-//        final StatesListResponse statesLists = new ObjectMapper().readValue(response, StatesListResponse.class);
-//        assertNull(statesLists.getStates());
-//    }
-//}
+    // ------------------------------------------ GET /states ------------------------------------------
+
+    //This test case passes when you are able to fetch the list of all available states.
+    @Test
+    public void shouldGetAllStates() throws Exception {
+        final String stateUuid = UUID.randomUUID().toString();
+        final StateEntity stateEntity = new StateEntity();
+        stateEntity.setStateName("stateName");
+        stateEntity.setUuid(stateUuid);
+        when(mockAddressService.getAllStates()).thenReturn(Collections.singletonList(stateEntity));
+
+        final String response = mockMvc
+                .perform(get("/states").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        final StatesListResponse statesLists = new ObjectMapper().readValue(response, StatesListResponse.class);
+        assertEquals(statesLists.getStates().size(), 1);
+
+        final StatesList statesList = statesLists.getStates().get(0);
+        assertEquals(statesList.getId().toString(), stateUuid);
+        assertEquals(statesList.getStateName(), "stateName");
+    }
+
+    //This test case passes when you are not able to retrive any states if there are no states saved in the database.
+    @Test
+    public void shouldNotGetAllStatesIfNonePresentInDb() throws Exception {
+        when(mockAddressService.getAllStates()).thenReturn(Collections.emptyList());
+
+        final String response = mockMvc
+                .perform(get("/states").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        final StatesListResponse statesLists = new ObjectMapper().readValue(response, StatesListResponse.class);
+        assertNull(statesLists.getStates());
+    }
+}
