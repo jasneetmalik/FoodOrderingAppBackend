@@ -14,11 +14,7 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "List of items")
 @Validated
-<<<<<<< HEAD
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-03-23T19:33:23.531+05:30")
-=======
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-03-24T20:57:37.599-04:00")
->>>>>>> master
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-03-25T13:55:18.438+05:30")
 
 public class ItemListResponse extends ArrayList<ItemList>  {
 
