@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "payment")
+@NamedQueries({@NamedQuery(name="getPaymentMethods", query="select p from PaymentEntity p")})
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
