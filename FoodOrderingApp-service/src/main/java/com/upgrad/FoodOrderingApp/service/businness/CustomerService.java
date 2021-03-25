@@ -73,12 +73,7 @@ public class CustomerService {
 
     }
 
-<<<<<<< HEAD
-// ************Authenticate using Contact Number and Password **********
-@Transactional(propagation = Propagation.REQUIRED)
-=======
 // ************Authenticate using Contact Number and Password ************************************************
->>>>>>> master
     public CustomerAuthEntity authenticate(String contact, String password) throws AuthenticationFailedException {
         //Check is Contact Exists
         CustomerEntity registeredCustomer = customerRepository.checkContact(contact);
@@ -147,19 +142,12 @@ public class CustomerService {
         CustomerEntity updatedCustomer = customerRepository.updateCustomer(customer);
         return updatedCustomer;
     }
-<<<<<<< HEAD
 
-
-    public CustomerEntity getCustomer(final String token) throws AuthorizationFailedException {
-=======
     //***** GET CUSTOMER (USED BY ALL ENDPOINTS REQUIRING AUTHENTICATION USING ACCESS TOKEN) ***********
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerEntity getCustomer(final String accessToken) throws AuthorizationFailedException {
->>>>>>> master
         // Get the customer details based on access token
-
-        CustomerAuthEntity customerAuth = customerRepository.findCustomerAuthByAccessToken(token);
-        System.out.println("Y????????????????????????????????????????????" + customerAuth);
+        CustomerAuthEntity customerAuth = customerRepository.findCustomerAuthByAccessToken(accessToken);
         final ZonedDateTime now;
         // Validates if customer is logged in
         if (customerAuth == null) {
