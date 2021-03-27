@@ -29,6 +29,7 @@ public class RestaurantService {
     // Method to getAllRestaurants endpoint;
     // Parameters: none
     public List<RestaurantEntity> getAllRestaurants() {
+
         return restaurantDao.getAllRestaurants();
     }
 

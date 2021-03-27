@@ -2,6 +2,8 @@ package com.upgrad.FoodOrderingApp.service.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -53,6 +55,11 @@ public class RestaurantEntity implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
+
+    @ManyToMany
+    @JoinTable(name="restaurant_category", joinColumns = @JoinColumn(name="restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name="category_id"))
+    private List<CategoryEntity> categories = new ArrayList<>();
 
     //GETTERS AND SETTERS
 
@@ -118,6 +125,14 @@ public class RestaurantEntity implements Serializable {
 
     public void setAddress(AddressEntity address) {
         this.address = address;
+    }
+
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryEntity> categories) {
+        this.categories = categories;
     }
 }
 
