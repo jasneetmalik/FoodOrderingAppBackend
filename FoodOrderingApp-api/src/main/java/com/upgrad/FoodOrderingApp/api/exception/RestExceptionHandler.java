@@ -49,6 +49,12 @@ public class RestExceptionHandler {
             .code(exc.getCode())
             .message(exc.getErrorMessage()), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(RestaurantNotFoundException.class)
+    public ResponseEntity<ErrorResponse> restaurantNotFoundException(RestaurantNotFoundException exc, WebRequest request) {
+        return new ResponseEntity<ErrorResponse>(new ErrorResponse()
+        .code(exc.getCode())
+        .message(exc.getErrorMessage()), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(SaveAddressException.class)
     public ResponseEntity<ErrorResponse> saveAddressException (SaveAddressException exc, WebRequest request){
