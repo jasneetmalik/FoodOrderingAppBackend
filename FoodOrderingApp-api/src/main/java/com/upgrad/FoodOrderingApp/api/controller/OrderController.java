@@ -1,10 +1,10 @@
 package com.upgrad.FoodOrderingApp.api.controller;
 
-import com.upgrad.FoodOrderingApp.api.model.CouponDetailsResponse;
+import com.upgrad.FoodOrderingApp.api.model.*;
+import com.upgrad.FoodOrderingApp.api.utility.Utility;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
 import com.upgrad.FoodOrderingApp.service.businness.OrderService;
-import com.upgrad.FoodOrderingApp.service.entity.CouponEntity;
-import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
+import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.CouponNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.DateFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -39,4 +43,71 @@ public class OrderController {
                 .percent(coupon.getPercent());
         return new ResponseEntity<CouponDetailsResponse>(couponDetailsResponse, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/orders", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<CustomerOrderResponse> getUserOrders(@RequestHeader("authorization") String token) throws AuthorizationFailedException {
+        final String[] bearerTokens = token.split("Bearer ");
+        final String accessToken;
+        if (bearerTokens.length == 2) {
+            accessToken = bearerTokens[1];
+        } else {
+            accessToken = token;
+        }
+
+        CustomerEntity customer = customerService.getCustomer(accessToken);
+        if(Utility.isNullOrEmpty(customer)) {
+            throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
+        }
+        List<OrdersEntity> list = orderService.getOrdersByCustomer(customer);
+        Collections.sort(list);
+        List<OrderList> listOrder = new ArrayList<>();
+
+        for (OrdersEntity ordersEntity : list) {
+            OrderList orderList = new OrderList();
+             orderList.setId(UUID.fromString(ordersEntity.getUuid()));
+             orderList.setBill(ordersEntity.getBill());
+             CouponEntity couponEntity = ordersEntity.getCouponId();
+             OrderListCoupon orderListCoupon= new OrderListCoupon();
+             orderListCoupon.setId(UUID.fromString(couponEntity.getUuid()));
+             orderListCoupon.setCouponName(couponEntity.getCouponName());
+             orderListCoupon.setPercent(couponEntity.getPercent());
+             orderList.setCoupon(orderListCoupon);
+             orderList.setDiscount(ordersEntity.getDiscount());
+             orderList.setDate(ordersEntity.getDate().toLocalDateTime().toString());
+            OrderListPayment orderListPayment = new OrderListPayment();
+            PaymentEntity paymentEntity= ordersEntity.getPaymentId();
+            orderListPayment.setId(UUID.fromString(paymentEntity.getUuid()));
+            orderListPayment.setPaymentName(paymentEntity.getPaymentName());
+            orderList.setPayment(orderListPayment);
+            OrderListCustomer orderListCustomer = new OrderListCustomer();
+            orderListCustomer.setId(UUID.fromString(customer.getUuid()));
+            orderListCustomer.setFirstName(customer.getFirstName());
+            orderListCustomer.setLastName(customer.getLastName());
+            orderListCustomer.setEmailAddress(customer.getEmail());
+            orderListCustomer.setContactNumber(customer.getContactNumber());
+            orderList.setCustomer(orderListCustomer);
+            AddressEntity addressEntity = ordersEntity.getAddress();
+            OrderListAddress orderListAddress = new OrderListAddress();
+            orderListAddress.setId(UUID.fromString(addressEntity.getUuid()));
+            orderListAddress.setFlatBuildingName(addressEntity.getFlatBuilNumber());
+            orderListAddress.setLocality(addressEntity.getLocality());
+            orderListAddress.setCity(addressEntity.getCity());
+            orderListAddress.setPincode(addressEntity.getPincode());
+            OrderListAddressState orderListAddressState = new OrderListAddressState();
+            orderListAddressState.setId(UUID.fromString(addressEntity.getStateId().getUuid()));
+            orderListAddressState.stateName(addressEntity.getStateId().getStateName());
+            orderListAddress.setState(orderListAddressState);
+            orderList.setAddress(orderListAddress);
+            List<ItemQuantityResponse> itemQuantityResponse  = null;
+            orderList.setItemQuantities(itemQuantityResponse);
+            listOrder.add(orderList);
+
+        }
+     CustomerOrderResponse customerOrderResponse = new CustomerOrderResponse();
+     customerOrderResponse.setOrders(listOrder);
+     return new ResponseEntity<>(customerOrderResponse, HttpStatus.OK);
+
+
+    }
+
 }

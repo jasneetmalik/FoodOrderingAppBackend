@@ -28,6 +28,9 @@ public class CouponEntity {
 
     //Constructor
 
+    public CouponEntity() {
+
+    }
 
     public CouponEntity(@NotNull @Size(max = 200) String uuid, @NotNull @Size(max = 255) String couponName, Integer percent) {
         this.uuid = uuid;

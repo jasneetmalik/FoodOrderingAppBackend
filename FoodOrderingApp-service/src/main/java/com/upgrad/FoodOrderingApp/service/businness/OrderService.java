@@ -2,9 +2,13 @@ package com.upgrad.FoodOrderingApp.service.businness;
 
 import com.upgrad.FoodOrderingApp.service.dao.OrderDao;
 import com.upgrad.FoodOrderingApp.service.entity.CouponEntity;
+import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
+import com.upgrad.FoodOrderingApp.service.entity.OrdersEntity;
 import com.upgrad.FoodOrderingApp.service.exception.CouponNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -20,5 +24,9 @@ public class OrderService {
             throw new CouponNotFoundException("CPF-001","No coupon by this name");
         }
         return coupon;
+    }
+
+    public List<OrdersEntity> getOrdersByCustomer(CustomerEntity customerEntity) {
+        return orderDao.getOrdersByCustomer(customerEntity);
     }
 }
