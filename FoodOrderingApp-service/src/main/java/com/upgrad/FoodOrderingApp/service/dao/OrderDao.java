@@ -2,6 +2,7 @@ package com.upgrad.FoodOrderingApp.service.dao;
 
 import com.upgrad.FoodOrderingApp.service.entity.CouponEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
+import com.upgrad.FoodOrderingApp.service.entity.OrderItemEntity;
 import com.upgrad.FoodOrderingApp.service.entity.OrdersEntity;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,15 @@ public class OrderDao {
 
         try {
             return entityManager.createNamedQuery("getOrdersByCustomer", OrdersEntity.class).setParameter("customer", customerEntity).getResultList();
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<OrderItemEntity> getOrderItem(OrdersEntity ordersEntity) {
+        try {
+            return entityManager.createNamedQuery("getOrderItemEntity", OrderItemEntity.class).setParameter("orderEntity", ordersEntity).getResultList();
         }
         catch (Exception e) {
             return null;

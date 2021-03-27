@@ -4,6 +4,7 @@ import com.upgrad.FoodOrderingApp.api.model.*;
 import com.upgrad.FoodOrderingApp.api.utility.Utility;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
 import com.upgrad.FoodOrderingApp.service.businness.OrderService;
+import com.upgrad.FoodOrderingApp.service.common.ItemType;
 import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.CouponNotFoundException;
@@ -98,7 +99,21 @@ public class OrderController {
             orderListAddressState.stateName(addressEntity.getStateId().getStateName());
             orderListAddress.setState(orderListAddressState);
             orderList.setAddress(orderListAddress);
-            List<ItemQuantityResponse> itemQuantityResponse  = null;
+            List<OrderItemEntity> orderItemEntity = orderService.getOrderItem(ordersEntity);
+            List<ItemQuantityResponse> itemQuantityResponse  = new ArrayList<>();
+            for (OrderItemEntity orderItemEntity1 : orderItemEntity) {
+                ItemQuantityResponse itemQuantityResponse1 = new ItemQuantityResponse();
+                ItemQuantityResponseItem item = new ItemQuantityResponseItem();
+                item.setId(UUID.fromString(orderItemEntity1.getItemId().getUuid()));
+                item.setItemName(orderItemEntity1.getItemId().getItemName());
+                item.setItemPrice(orderItemEntity1.getItemId().getPrice());
+                ItemType type = orderItemEntity1.getItemId().getType();
+                item.setType(ItemQuantityResponseItem.TypeEnum.valueOf(type.toString()));
+                itemQuantityResponse1.setItem(item);
+                itemQuantityResponse1.setPrice(orderItemEntity1.getPrice());
+                itemQuantityResponse1.setQuantity(orderItemEntity1.getQuantity());
+                itemQuantityResponse.add(itemQuantityResponse1);
+            }
             orderList.setItemQuantities(itemQuantityResponse);
             listOrder.add(orderList);
 
@@ -106,8 +121,6 @@ public class OrderController {
      CustomerOrderResponse customerOrderResponse = new CustomerOrderResponse();
      customerOrderResponse.setOrders(listOrder);
      return new ResponseEntity<>(customerOrderResponse, HttpStatus.OK);
-
-
     }
 
 }
