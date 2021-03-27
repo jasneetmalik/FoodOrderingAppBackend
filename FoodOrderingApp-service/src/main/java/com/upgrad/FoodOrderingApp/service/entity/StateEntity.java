@@ -9,7 +9,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "state")
-@NamedQueries({@NamedQuery(name = "getStateById", query = "select s from StateEntity s where s.uuid = :uuid")})
+@NamedQueries({@NamedQuery(name = "getStateById", query = "select s from StateEntity s where s.uuid = :uuid"),
+@NamedQuery(name = "getAllStates", query = "select s from StateEntity s")})
 public class StateEntity {
     @Id
     @Column(name = "id")

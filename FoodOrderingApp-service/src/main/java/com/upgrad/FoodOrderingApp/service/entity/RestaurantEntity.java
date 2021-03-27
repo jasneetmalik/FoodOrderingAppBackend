@@ -2,20 +2,21 @@ package com.upgrad.FoodOrderingApp.service.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "restaurant")
+@NamedQueries(
+        {
+                @NamedQuery(name = "allRestaurants", query = "select r from RestaurantEntity r order by r.customerRating desc"),
+                @NamedQuery(name = "findByName", query = "select r from RestaurantEntity  r where lower(r.restaurantName) like :restaurantName order by r.restaurantName"),
+                @NamedQuery(name = "findRestaurantByUUId",query = "select r from RestaurantEntity r where lower(r.uuid) = :restaurantUUID")
+        }
+)
 
 public class RestaurantEntity implements Serializable {
 
@@ -54,6 +55,11 @@ public class RestaurantEntity implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
+
+    @ManyToMany
+    @JoinTable(name="restaurant_category", joinColumns = @JoinColumn(name="restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name="category_id"))
+    private List<CategoryEntity> categories = new ArrayList<>();
 
     //GETTERS AND SETTERS
 
@@ -119,6 +125,14 @@ public class RestaurantEntity implements Serializable {
 
     public void setAddress(AddressEntity address) {
         this.address = address;
+    }
+
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryEntity> categories) {
+        this.categories = categories;
     }
 }
 

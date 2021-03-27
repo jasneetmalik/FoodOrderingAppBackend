@@ -31,9 +31,6 @@ public class CategoryService {
         }
         return categoryEntity;
     }
-    //Get Items by CategoryId
-    public List<CategoryItemEntity> getItemsByCategory(Integer Id) {
-        return categoryDao.getItemsByCategoryId(Id);
-    }
+
 }
 

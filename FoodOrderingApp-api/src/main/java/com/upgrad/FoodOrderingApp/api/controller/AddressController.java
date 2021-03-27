@@ -105,7 +105,7 @@ public class AddressController {
     }
 
 
-    @RequestMapping(path = "/address/delete/{addressId}", produces = APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.DELETE)
+    @RequestMapping(path = "/address/{addressId}", produces = APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.DELETE)
     public ResponseEntity<DeleteAddressResponse> deleteAddress(@PathVariable("addressId") String uuid, @RequestHeader("authorization") String token) throws AuthorizationFailedException, AddressNotFoundException {
         final String[] bearerTokens = token.split("Bearer ");
         final String accessToken;
@@ -119,14 +119,42 @@ public class AddressController {
         if(Utility.isNullOrEmpty(customer)) {
             throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
         }
-        addressService.getAddressByUUID(uuid, customer);
+        AddressEntity addressEntity = addressService.getAddressByUUID(uuid, customer);
+        addressEntity = addressService.deleteAddress(addressEntity);
 
         DeleteAddressResponse deleteAddressResponse = new DeleteAddressResponse();
-        deleteAddressResponse.setId(UUID.fromString(uuid));
+        deleteAddressResponse.setId(UUID.fromString(addressEntity.getUuid()));
         deleteAddressResponse.setStatus("ADDRESS DELETED SUCCESSFULLY");
 
         return new ResponseEntity<>(deleteAddressResponse, HttpStatus.OK);
 
     }
 
+
+    @RequestMapping(method = RequestMethod.GET, path = "/states", produces = APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<StatesListResponse> getStates() {
+
+        List<StateEntity> stateEntities = null;
+        StatesListResponse statesListResponse = new StatesListResponse();
+        List<StatesList> statesLists = new ArrayList<>();
+        stateEntities = addressService.getAllStates();
+
+        for(StateEntity s : stateEntities) {
+            StatesList statesList = new StatesList();
+            statesList.setId(UUID.fromString(s.getUuid()));
+            statesList.stateName(s.getStateName());
+            statesLists.add(statesList);
+        }
+        if(statesLists.size() == 0) {
+            statesListResponse.states(null);
+        }
+        else {
+            statesListResponse.states(statesLists);
+        }
+
+        return new ResponseEntity<>(statesListResponse, HttpStatus.OK);
+
+        }
 }
+
+
