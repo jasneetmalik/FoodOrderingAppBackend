@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_25-03-2021_08_59_[Default]" date="1616677178095" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_59_[Default]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 25-03-2021 08:59 [Default]" />
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-db/target/FoodOrderingApp-db.jar" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-db/target/FoodOrderingApp-db.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_59_[Default]/FoodOrderingApp-db.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/FoodOrderingApp-service-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/FoodOrderingApp-service-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_59_[Default]/FoodOrderingApp-service-1.0-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-api/target/FoodOrderingApp-api-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-api/target/FoodOrderingApp-api-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_59_[Default]/FoodOrderingApp-api-1.0-SNAPSHOT.jar" />
+  </binary>
+</changelist>

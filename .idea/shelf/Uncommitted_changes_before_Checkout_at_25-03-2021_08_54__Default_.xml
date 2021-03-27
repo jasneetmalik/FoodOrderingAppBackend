@@ -1,0 +1,239 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]" date="1616677032969" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 25-03-2021 08:54 [Default]" />
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/InvalidRatingException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/InvalidRatingException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/InvalidRatingException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/RestaurantItemEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/RestaurantItemEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/RestaurantItemEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CouponEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CouponEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CouponEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/ItemEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/PaymentService.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/PaymentService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/PaymentService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/AddressEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/AddressEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/AddressEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/OrderDao.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/OrderDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/OrderDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/RestaurantCategoryEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/RestaurantCategoryEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/RestaurantCategoryEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/OrderItemEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/OrderItemEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/OrderItemEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/GenericErrorCode.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/GenericErrorCode.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/GenericErrorCode.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CustomerEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CustomerEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CustomerEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/CustomerNotFoundException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/CustomerNotFoundException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CustomerNotFoundException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/RestaurantNotFoundException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/RestaurantNotFoundException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/RestaurantNotFoundException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/ItemNotFoundException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/ItemNotFoundException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/ItemNotFoundException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/AuthorizationFailedException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/AuthorizationFailedException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/AuthorizationFailedException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/PasswordCryptographyProvider.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/PasswordCryptographyProvider.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/PasswordCryptographyProvider.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CategoryEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/UpdateCustomerException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/UpdateCustomerException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/UpdateCustomerException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/SaveAddressException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/SaveAddressException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/SaveAddressException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/PaymentEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/PaymentEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/PaymentEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/AuthenticationFailedException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/AuthenticationFailedException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/AuthenticationFailedException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryItemEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CategoryItemEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CategoryItemEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/CustomerRepository.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/CustomerRepository.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CustomerRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/CategoryNotFoundException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/CategoryNotFoundException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CategoryNotFoundException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/ErrorCode.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/ErrorCode.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/ErrorCode.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/OrdersEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/OrdersEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/OrdersEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/FoodOrderingAppApiApplication.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/FoodOrderingAppApiApplication.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/FoodOrderingAppApiApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/SignUpRestrictedException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/SignUpRestrictedException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/SignUpRestrictedException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/config/SwaggerConfiguration.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-api/target/classes/com/upgrad/FoodOrderingApp/api/config/SwaggerConfiguration.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/SwaggerConfiguration.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/RestaurantEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/RestaurantEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/RestaurantEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/ServiceConfiguration.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/ServiceConfiguration.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/ServiceConfiguration.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/PaymentMethodNotFoundException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/PaymentMethodNotFoundException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/PaymentMethodNotFoundException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/UnexpectedException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/UnexpectedException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/UnexpectedException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/PaymentDao.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/PaymentDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/PaymentDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/CategoryDao.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/dao/CategoryDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CategoryDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-db/target/FoodOrderingApp-db.jar" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-db/target/FoodOrderingApp-db.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/FoodOrderingApp-db.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CustomerAddressEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CustomerAddressEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CustomerAddressEntity.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CustomerService.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CustomerService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CustomerService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/JwtTokenProvider.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/JwtTokenProvider.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/JwtTokenProvider.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/FoodOrderingApp-service-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/FoodOrderingApp-service-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/FoodOrderingApp-service-1.0-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CategoryService.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/CategoryService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CategoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/ItemType.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/common/ItemType.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/ItemType.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/CouponNotFoundException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/CouponNotFoundException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CouponNotFoundException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/AddressNotFoundException.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/exception/AddressNotFoundException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/AddressNotFoundException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-api/target/FoodOrderingApp-api-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-api/target/FoodOrderingApp-api-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/FoodOrderingApp-api-1.0-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/OrderService.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/OrderService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/OrderService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CustomerAuthEntity.class" />
+    <option name="AFTER_PATH" value="FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/entity/CustomerAuthEntity.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-03-2021_08_54_[Default]/CustomerAuthEntity.class" />
+  </binary>
+</changelist>
