@@ -2,6 +2,7 @@ package com.upgrad.FoodOrderingApp.service.businness;
 
 import com.upgrad.FoodOrderingApp.service.dao.ItemDao;
 import com.upgrad.FoodOrderingApp.service.entity.ItemEntity;
+import com.upgrad.FoodOrderingApp.service.entity.OrdersEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantEntity;
 import com.upgrad.FoodOrderingApp.service.exception.ItemNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class ItemService {
             throw new ItemNotFoundException("INF-003", "No item by this id exist");
         }
         return item;
+    }
+
+    public List<OrdersEntity> getOrdersOfRestaurant(RestaurantEntity restaurantEntity) {
+        return itemDao.getOrders(restaurantEntity);
     }
 
 }

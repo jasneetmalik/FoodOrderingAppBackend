@@ -9,7 +9,8 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "orders")
-@NamedQueries({@NamedQuery(name = "getOrdersByCustomer", query = "select o from OrdersEntity o where o.customer = :customer")})
+@NamedQueries({@NamedQuery(name = "getOrdersByCustomer", query = "select o from OrdersEntity o where o.customer = :customer"),
+@NamedQuery(name = "GetOrdersOfRestaurant", query = "select o from OrdersEntity o where o.restaurant = :restaurant")})
 public class OrdersEntity implements Comparable<OrdersEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
