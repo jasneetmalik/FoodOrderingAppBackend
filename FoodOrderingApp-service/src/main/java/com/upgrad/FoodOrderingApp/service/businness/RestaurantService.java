@@ -41,7 +41,7 @@ public class RestaurantService {
 
     // Method to get Restaurants by Category
     // Parameters: categoryUUID
-    public List<RestaurantCategoryEntity> getRestaurantByCategoryId(final Long categoryID) {
+    public List<RestaurantCategoryEntity> getRestaurantsByCategoryId(final Integer categoryID) {
         return restaurantDao.getRestaurantByCategoryId(categoryID);
     }
 

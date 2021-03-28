@@ -20,7 +20,7 @@ public class CategoryService {
         return categoryDao.getAllCategories();
     }
     //Get Category by Id
-    public CategoryEntity getCategoryById(String uuid) throws CategoryNotFoundException {
+    public CategoryEntity getCategoryByUuid(String uuid) throws CategoryNotFoundException {
         if (uuid.equals("")) {
             throw new CategoryNotFoundException("CNF-001", "Category id field should not be empty");
         }

@@ -6,14 +6,11 @@ import com.upgrad.FoodOrderingApp.api.model.CategoryListResponse;
 import com.upgrad.FoodOrderingApp.api.model.ItemList;
 import com.upgrad.FoodOrderingApp.service.businness.CategoryService;
 import com.upgrad.FoodOrderingApp.service.entity.CategoryEntity;
-import com.upgrad.FoodOrderingApp.service.entity.CategoryItemEntity;
 import com.upgrad.FoodOrderingApp.service.entity.ItemEntity;
 import com.upgrad.FoodOrderingApp.service.exception.CategoryNotFoundException;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
@@ -51,7 +48,7 @@ public class CategoryController {
             @PathVariable("category_id") final String categoryId) throws CategoryNotFoundException {
 
             //Get Category By Id
-            CategoryEntity categoryById = categoryService.getCategoryById(categoryId);
+            CategoryEntity categoryById = categoryService.getCategoryByUuid(categoryId);
 
             //Create Response
             CategoryDetailsResponse categoryDetailsResponse = new CategoryDetailsResponse()
