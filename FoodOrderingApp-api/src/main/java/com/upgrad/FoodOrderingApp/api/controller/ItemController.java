@@ -35,7 +35,7 @@ public class ItemController {
     public ResponseEntity<ItemListResponse> getTopFiveItemsForRestaurant(
             @PathVariable("restaurant_id") final String restaurantId) throws RestaurantNotFoundException {
         RestaurantEntity restaurant = restaurantService.getRestaurantByUUId(restaurantId);
-        List<ItemEntity> topFiveItems = itemService.getTop5Items(restaurant);
+        List<ItemEntity> topFiveItems = itemService.getItemsByPopularity(restaurant);
         ItemListResponse itemListResponse = new ItemListResponse();
         topFiveItems.forEach(itemEntity -> {
             ItemList itemList = new ItemList()

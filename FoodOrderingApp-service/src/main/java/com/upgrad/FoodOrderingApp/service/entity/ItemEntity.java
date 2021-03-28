@@ -8,8 +8,8 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="item")
-@NamedQueries({@NamedQuery(name="getItemById", query="SELECT i from ItemEntity i where i.id = :id"),
-        @NamedQuery(
+@NamedNativeQueries({
+        @NamedNativeQuery(
                 name = "topFivePopularItemsByRestaurant",
                 query =
                         "select * from item where id in "
@@ -17,7 +17,10 @@ import javax.validation.constraints.Size;
                                 + "(select id from orders where restaurant_id = ? ) "
                                 + "group by order_item.item_id "
                                 + "order by (count(order_item.order_id)) "
-                                + "desc LIMIT 5)"),
+                                + "desc LIMIT 5)",
+                resultClass = ItemEntity.class)
+})
+@NamedQueries({@NamedQuery(name="getItemById", query="SELECT i from ItemEntity i where i.id = :id"),
         @NamedQuery(name = "itemByUUID", query = "select i from ItemEntity i where i.uuid=:itemUUID"),
 
 })
