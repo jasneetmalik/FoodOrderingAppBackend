@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
-
+import static com.upgrad.FoodOrderingApp.api.controller.OrderController.getSaveOrderRequest;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -57,8 +57,12 @@ public class OrderControllerTest {
     @MockBean
     private ItemService mockItemService;
 
+    private OrderController orderController = new OrderController();
+
+
+
     // ------------------------------------------ POST /order ------------------------------------------
-/*
+
     //This test case passes when you are able to save order successfully.
     @Test
     public void shouldSaveOrder() throws Exception {
@@ -68,7 +72,9 @@ public class OrderControllerTest {
         when(mockCustomerService.getCustomer("database_accesstoken2"))
                 .thenReturn(customerEntity);
 
+
         final SaveOrderRequest saveOrderRequest = getSaveOrderRequest();
+        System.out.println(saveOrderRequest);
         when(mockPaymentService.getPaymentByUUID(saveOrderRequest.getPaymentId().toString()))
                 .thenReturn(new PaymentEntity());
         when(mockAddressService.getAddressByUUID(saveOrderRequest.getAddressId(), customerEntity))
@@ -78,7 +84,7 @@ public class OrderControllerTest {
         when(mockOrderService.getCouponByCouponId(saveOrderRequest.getCouponId().toString()))
                 .thenReturn(new CouponEntity());
 
-        final OrderEntity orderEntity = new OrderEntity();
+        final OrdersEntity orderEntity = new OrdersEntity();
         final String orderId = UUID.randomUUID().toString();
         orderEntity.setUuid(orderId);
         when(mockOrderService.saveOrder(any())).thenReturn(orderEntity);
@@ -350,7 +356,7 @@ public class OrderControllerTest {
         verify(mockOrderService, times(0)).saveOrder(any());
         verify(mockOrderService, times(0)).saveOrderItem(any());
     }
-*/
+
     // ------------------------------------------ GET /order ------------------------------------------
 
     //This test case passes when you are able to retrieve all past orders placed by you

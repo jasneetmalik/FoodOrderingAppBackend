@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.DateFormatter;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +39,8 @@ public class OrderController {
 
     @Autowired
     private ItemService itemService;
+
+   static private SaveOrderRequest saveOrderRequest = new SaveOrderRequest();
 
     @RequestMapping(method = RequestMethod.GET, path = "order/coupon/{coupon_name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<CouponDetailsResponse> getCouponByName(
@@ -136,7 +139,8 @@ public class OrderController {
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SaveOrderResponse> saveOrder(@RequestHeader("authorization") String token, @RequestBody() SaveOrderRequest saveOrderRequest) throws AuthorizationFailedException, CouponNotFoundException, AddressNotFoundException, PaymentMethodNotFoundException, ItemNotFoundException {
+    public ResponseEntity<SaveOrderResponse> saveOrder(@RequestHeader("authorization") String token, @RequestBody() SaveOrderRequest saveOrderRequest) throws AuthorizationFailedException, CouponNotFoundException, AddressNotFoundException, PaymentMethodNotFoundException, ItemNotFoundException, RestaurantNotFoundException {
+        //this.saveOrderRequest = saveOrderRequest;
         final String[] bearerTokens = token.split("Bearer ");
         final String accessToken;
         if (bearerTokens.length == 2) {
@@ -149,10 +153,12 @@ public class OrderController {
         if(Utility.isNullOrEmpty(customer)) {
             throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
         }
+
+       // getSaveOrderRequest();
             CouponEntity couponEntity = orderService.getCouponByCouponId(saveOrderRequest.getCouponId().toString());
-            AddressEntity addressEntity = addressService.getAddressByUUID(saveOrderRequest.getAddressId(), customer);
             PaymentEntity paymentEntity = paymentService.getPaymentByUUID(saveOrderRequest.getPaymentId().toString());
-            RestaurantEntity restaurantEntity = restaurantService.getRestaurantByUUId(saveOrderRequest.getRestaurantId().toString());
+            AddressEntity addressEntity = addressService.getAddressByUUID(saveOrderRequest.getAddressId(), customer);
+            RestaurantEntity restaurantEntity = restaurantService.restaurantByUUID(saveOrderRequest.getRestaurantId().toString());
 
             OrdersEntity ordersEntity = new OrdersEntity();
             ordersEntity.setPaymentId(paymentEntity);
@@ -175,9 +181,10 @@ public class OrderController {
                         OrderItemEntity orderItemEntity = new OrderItemEntity();
                         ItemEntity itemEntity = itemService.getItemByUUID(itemQuantity.getItemId().toString());
                         orderItemEntity.setItemId(itemEntity);
+                        if(itemEntity != null) {
                         orderItemEntity.setPrice(itemEntity.getPrice());
                         orderItemEntity.setQuantity(itemQuantity.getQuantity());
-                        orderItemEntity.setOrderId(ordersEntity);
+                        orderItemEntity.setOrderId(ordersEntity);}
                         orderItemEntityList.add(orderItemEntity);
                     }
 
@@ -191,6 +198,23 @@ public class OrderController {
 
                     return new ResponseEntity<>(saveOrderResponse, HttpStatus.CREATED);
 
+        }
+
+        public static SaveOrderRequest getSaveOrderRequest() {
+            saveOrderRequest.setAddressId("abc");
+            saveOrderRequest.setBill(new BigDecimal(20000000));
+            saveOrderRequest.setDiscount(new BigDecimal(10000));
+            saveOrderRequest.setCouponId(UUID.randomUUID());
+            ItemQuantity itemQuantity = new ItemQuantity();
+            itemQuantity.setItemId(UUID.fromString("1dd86f90-a296-11e8-9a3a-720006ceb890"));
+            itemQuantity.setQuantity(5);
+            itemQuantity.setPrice(20000);
+            List<ItemQuantity> list = new ArrayList<>();
+            list.add(itemQuantity);
+            saveOrderRequest.setItemQuantities(list);
+            saveOrderRequest.setRestaurantId(UUID.randomUUID());
+            saveOrderRequest.setPaymentId(UUID.randomUUID());
+            return saveOrderRequest;
         }
 }
 

@@ -47,8 +47,12 @@ public class RestaurantService {
 
     // Method to get Restaurant by UUID
     // Parameters: restaurantUUID
-    public RestaurantEntity getRestaurantByUUId(String restaurantUUID) {
-        return restaurantDao.getRestaurantByUUId(restaurantUUID);
+    public RestaurantEntity restaurantByUUID(String restaurantUUID) throws RestaurantNotFoundException {
+        RestaurantEntity restaurantEntity =restaurantDao.getRestaurantByUUId(restaurantUUID);
+        if (restaurantEntity == null) {
+            throw new RestaurantNotFoundException("RNF-001","No restaurant by this id");
+        }
+        return restaurantEntity;
     }
 
     // Method to update Customer Rating
