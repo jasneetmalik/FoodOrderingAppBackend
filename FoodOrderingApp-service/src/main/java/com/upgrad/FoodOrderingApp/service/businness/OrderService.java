@@ -27,7 +27,7 @@ public class OrderService {
         return coupon;
     }
 
-    public List<OrdersEntity> getOrdersByCustomer(CustomerEntity customerEntity) {
+    public List<OrdersEntity> getOrdersByCustomers(CustomerEntity customerEntity) {
         return orderDao.getOrdersByCustomer(customerEntity);
     }
 

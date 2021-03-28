@@ -1,9 +1,11 @@
-/*package com.upgrad.FoodOrderingApp.api.controller;
+package com.upgrad.FoodOrderingApp.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.upgrad.FoodOrderingApp.api.model.CustomerOrderResponse;
 import com.upgrad.FoodOrderingApp.api.model.ItemQuantity;
 import com.upgrad.FoodOrderingApp.api.model.SaveOrderRequest;
+import com.upgrad.FoodOrderingApp.service.businness.*;
+import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,10 +18,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -52,7 +56,7 @@ public class OrderControllerTest {
 
     @MockBean
     private ItemService mockItemService;
-
+/*
     // ------------------------------------------ POST /order ------------------------------------------
 
     //This test case passes when you are able to save order successfully.
@@ -345,7 +349,7 @@ public class OrderControllerTest {
                 .getCouponByCouponId(saveOrderRequest.getCouponId().toString());
         verify(mockOrderService, times(0)).saveOrder(any());
         verify(mockOrderService, times(0)).saveOrderItem(any());
-    }
+    }*/
 
     // ------------------------------------------ GET /order ------------------------------------------
 
@@ -358,8 +362,24 @@ public class OrderControllerTest {
         when(mockCustomerService.getCustomer("database_accesstoken2"))
                 .thenReturn(customerEntity);
 
-        final OrderEntity orderEntity = getOrderEntity(customerEntity);
-        when(mockOrderService.getOrdersByCustomers(customerId))
+        final OrdersEntity orderEntity = new OrdersEntity();
+        orderEntity.setUuid(UUID.randomUUID().toString());
+        orderEntity.setCustomer(customerEntity);
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setUuid(UUID.randomUUID().toString());
+        orderEntity.setAddress(addressEntity);
+        StateEntity stateEntity = new StateEntity();
+        stateEntity.setUuid(UUID.randomUUID().toString());
+        addressEntity.setStateId(stateEntity);
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setUuid(UUID.randomUUID().toString());
+        orderEntity.setCouponId(couponEntity);
+        orderEntity.setDate(ZonedDateTime.now());
+        PaymentEntity paymentEntity = new PaymentEntity();
+        paymentEntity.setUuid(UUID.randomUUID().toString());
+        orderEntity.setPaymentId(paymentEntity);
+
+        when(mockOrderService.getOrdersByCustomers(customerEntity))
                 .thenReturn(Collections.singletonList(orderEntity));
 
         final String responseString = mockMvc
@@ -375,10 +395,10 @@ public class OrderControllerTest {
         assertEquals(customerOrderResponse.getOrders().get(0).getId().toString(), orderEntity.getUuid());
         assertEquals(customerOrderResponse.getOrders().get(0).getCustomer().getId().toString(), orderEntity.getCustomer().getUuid());
         assertEquals(customerOrderResponse.getOrders().get(0).getAddress().getId().toString(), orderEntity.getAddress().getUuid());
-        assertEquals(customerOrderResponse.getOrders().get(0).getAddress().getState().getId().toString(), orderEntity.getAddress().getState().getUuid());
+        assertEquals(customerOrderResponse.getOrders().get(0).getAddress().getState().getId().toString(), orderEntity.getAddress().getStateId().getUuid());
 
         verify(mockCustomerService, times(1)).getCustomer("database_accesstoken2");
-        verify(mockOrderService, times(1)).getOrdersByCustomers(customerId);
+        verify(mockOrderService, times(1)).getOrdersByCustomers(customerEntity);
     }
 
     //This test case passes when you have handled the exception of trying to fetch placed orders if you are not logged in.
@@ -394,7 +414,7 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("ATHR-001"));
 
         verify(mockCustomerService, times(1)).getCustomer("invalid_auth");
-        verify(mockOrderService, times(0)).getOrdersByCustomers(anyString());
+        verify(mockOrderService, times(0)).getOrdersByCustomers(any());
     }
 
     //This test case passes when you have handled the exception of trying to fetch placed orders if you are already
@@ -411,7 +431,7 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("ATHR-002"));
 
         verify(mockCustomerService, times(1)).getCustomer("invalid_auth");
-        verify(mockOrderService, times(0)).getOrdersByCustomers(anyString());
+        verify(mockOrderService, times(0)).getOrdersByCustomers(any());
     }
 
     //This test case passes when you have handled the exception of trying to fetch placed orders if your session is
@@ -428,7 +448,7 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("ATHR-003"));
 
         verify(mockCustomerService, times(1)).getCustomer("invalid_auth");
-        verify(mockOrderService, times(0)).getOrdersByCustomers(anyString());
+        verify(mockOrderService, times(0)).getOrdersByCustomers(any());
     }
 
     // ------------------------------------------ GET /order/coupon/{coupon_name} ------------------------------------------
@@ -542,8 +562,8 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("CPF-001"));
         verify(mockCustomerService, times(1)).getCustomer("database_accesstoken2");
         verify(mockOrderService, times(1)).getCouponByCouponName("myCoupon");
-    }
-
+    }}
+/*
     // ------------------------------------------ POJO Builder ------------------------------------------
 
     private SaveOrderRequest getSaveOrderRequest() {

@@ -45,7 +45,7 @@ public class OrderController {
         return new ResponseEntity<CouponDetailsResponse>(couponDetailsResponse, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/orders", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = RequestMethod.GET, path = "/order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<CustomerOrderResponse> getUserOrders(@RequestHeader("authorization") String token) throws AuthorizationFailedException {
         final String[] bearerTokens = token.split("Bearer ");
         final String accessToken;
@@ -59,7 +59,7 @@ public class OrderController {
         if(Utility.isNullOrEmpty(customer)) {
             throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
         }
-        List<OrdersEntity> list = orderService.getOrdersByCustomer(customer);
+        List<OrdersEntity> list = orderService.getOrdersByCustomers(customer);
         Collections.sort(list);
         List<OrderList> listOrder = new ArrayList<>();
 
@@ -110,7 +110,7 @@ public class OrderController {
                 ItemType type = orderItemEntity1.getItemId().getType();
                 item.setType(ItemQuantityResponseItem.TypeEnum.valueOf(type.toString()));
                 itemQuantityResponse1.setItem(item);
-                itemQuantityResponse1.setPrice(orderItemEntity1.getPrice());
+                itemQuantityResponse1.setPrice(orderItemEntity1.getItemId().getPrice());
                 itemQuantityResponse1.setQuantity(orderItemEntity1.getQuantity());
                 itemQuantityResponse.add(itemQuantityResponse1);
             }
