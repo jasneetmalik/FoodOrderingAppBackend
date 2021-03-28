@@ -22,7 +22,6 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
-import static com.upgrad.FoodOrderingApp.api.controller.OrderController.getSaveOrderRequest;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -568,8 +567,8 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("CPF-001"));
         verify(mockCustomerService, times(1)).getCustomer("database_accesstoken2");
         verify(mockOrderService, times(1)).getCouponByCouponName("myCoupon");
-    }}
-/*
+    }
+
     // ------------------------------------------ POJO Builder ------------------------------------------
 
     private SaveOrderRequest getSaveOrderRequest() {
@@ -601,7 +600,7 @@ public class OrderControllerTest {
         return request;
     }
 
-    private OrderEntity getOrderEntity(final CustomerEntity customerEntity) {
+    private OrdersEntity getOrderEntity(final CustomerEntity customerEntity) {
         final String stateId = UUID.randomUUID().toString();
         final StateEntity stateEntity = new StateEntity(stateId, "someState");
 
@@ -628,9 +627,9 @@ public class OrderControllerTest {
 
         final String orderId = UUID.randomUUID().toString();
         final Date orderDate = new Date();
-        return new OrderEntity(orderId, 200.50, couponEntity, 10.0,
-                orderDate, paymentEntity, customerEntity, addressEntity, restaurantEntity);
+        return new OrdersEntity(orderId, new BigDecimal(200.50), couponEntity, new BigDecimal(10.0),
+                ZonedDateTime.parse(orderDate.toString()), paymentEntity, customerEntity, addressEntity, restaurantEntity);
     }
 
 
-}*/
+}

@@ -23,6 +23,14 @@ public class PaymentEntity {
     @Size(max = 255)
     private String paymentName;
 
+    public PaymentEntity() {
+    }
+
+    public PaymentEntity(@NotNull @Size(max = 200) String uuid, @Size(max = 255) String paymentName) {
+        this.uuid = uuid;
+        this.paymentName = paymentName;
+    }
+
     public Integer getId() {
         return id;
     }

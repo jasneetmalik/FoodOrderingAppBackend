@@ -40,8 +40,6 @@ public class OrderController {
     @Autowired
     private ItemService itemService;
 
-   static private SaveOrderRequest saveOrderRequest = new SaveOrderRequest();
-
     @RequestMapping(method = RequestMethod.GET, path = "order/coupon/{coupon_name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<CouponDetailsResponse> getCouponByName(
             @PathVariable(value = "coupon_name") final String couponName,
@@ -198,23 +196,6 @@ public class OrderController {
 
                     return new ResponseEntity<>(saveOrderResponse, HttpStatus.CREATED);
 
-        }
-
-        public static SaveOrderRequest getSaveOrderRequest() {
-            saveOrderRequest.setAddressId("abc");
-            saveOrderRequest.setBill(new BigDecimal(20000000));
-            saveOrderRequest.setDiscount(new BigDecimal(10000));
-            saveOrderRequest.setCouponId(UUID.randomUUID());
-            ItemQuantity itemQuantity = new ItemQuantity();
-            itemQuantity.setItemId(UUID.fromString("1dd86f90-a296-11e8-9a3a-720006ceb890"));
-            itemQuantity.setQuantity(5);
-            itemQuantity.setPrice(20000);
-            List<ItemQuantity> list = new ArrayList<>();
-            list.add(itemQuantity);
-            saveOrderRequest.setItemQuantities(list);
-            saveOrderRequest.setRestaurantId(UUID.randomUUID());
-            saveOrderRequest.setPaymentId(UUID.randomUUID());
-            return saveOrderRequest;
         }
 }
 

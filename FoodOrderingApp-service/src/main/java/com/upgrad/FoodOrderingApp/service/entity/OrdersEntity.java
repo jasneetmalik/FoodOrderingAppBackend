@@ -51,6 +51,21 @@ public class OrdersEntity implements Comparable<OrdersEntity> {
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
 
+    public OrdersEntity() {
+    }
+
+    public OrdersEntity(@NotNull @Size(max = 200) String uuid, BigDecimal bill, CouponEntity couponId, BigDecimal discount, ZonedDateTime date, PaymentEntity paymentId, CustomerEntity customer, AddressEntity address, RestaurantEntity restaurant) {
+        this.uuid = uuid;
+        this.bill = bill;
+        this.couponId = couponId;
+        this.discount = discount;
+        this.date = date;
+        this.paymentId = paymentId;
+        this.customer = customer;
+        this.address = address;
+        this.restaurant = restaurant;
+    }
+
     public Integer getId() {
         return id;
     }
