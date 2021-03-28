@@ -102,7 +102,7 @@ public class OrderController {
             AddressEntity addressEntity = ordersEntity.getAddress();
             OrderListAddress orderListAddress = new OrderListAddress();
             orderListAddress.setId(UUID.fromString(addressEntity.getUuid()));
-            orderListAddress.setFlatBuildingName(addressEntity.getFlatBuilNumber());
+            orderListAddress.setFlatBuildingName(addressEntity.getFlatBuilNo());
             orderListAddress.setLocality(addressEntity.getLocality());
             orderListAddress.setCity(addressEntity.getCity());
             orderListAddress.setPincode(addressEntity.getPincode());
@@ -197,6 +197,7 @@ public class OrderController {
                     return new ResponseEntity<>(saveOrderResponse, HttpStatus.CREATED);
 
         }
+
 }
 
 

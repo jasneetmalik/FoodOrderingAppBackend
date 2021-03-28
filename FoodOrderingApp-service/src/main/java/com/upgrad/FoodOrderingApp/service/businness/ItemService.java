@@ -16,7 +16,7 @@ public class ItemService {
     @Autowired
     private ItemDao itemDao;
 
-    public List<ItemEntity> getTop5Items(RestaurantEntity restaurantEntity) {
+    public List<ItemEntity> getItemsByPopularity(RestaurantEntity restaurantEntity) {
         return itemDao.getTop5ItemsByRestaurant(restaurantEntity);
     }
 

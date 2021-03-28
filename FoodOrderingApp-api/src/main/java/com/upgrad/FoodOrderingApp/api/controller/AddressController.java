@@ -5,7 +5,6 @@ import com.upgrad.FoodOrderingApp.api.utility.Utility;
 import com.upgrad.FoodOrderingApp.service.businness.AddressService;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
 import com.upgrad.FoodOrderingApp.service.entity.AddressEntity;
-import com.upgrad.FoodOrderingApp.service.entity.CustomerAddressEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
 import com.upgrad.FoodOrderingApp.service.entity.StateEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AddressNotFoundException;
@@ -51,7 +50,7 @@ public class AddressController {
 
         addressEntity.setCity(saveAddressRequest.getCity());
         addressEntity.setLocality(saveAddressRequest.getLocality());
-        addressEntity.setFlatBuilNumber(saveAddressRequest.getFlatBuildingName());
+        addressEntity.setFlatBuilNo(saveAddressRequest.getFlatBuildingName());
         addressEntity.setPincode(saveAddressRequest.getPincode());
         addressEntity.setStateId(stateEntity);
         addressEntity.setUuid(UUID.randomUUID().toString());
@@ -92,7 +91,7 @@ public class AddressController {
             addressList.setId(UUID.fromString(list.get(i).getUuid()));
             addressList.setPincode(list.get(i).getPincode());
             addressList.setLocality(list.get(i).getLocality());
-            addressList.setFlatBuildingName(list.get(i).getFlatBuilNumber());
+            addressList.setFlatBuildingName(list.get(i).getFlatBuilNo());
             AddressListState state = new AddressListState();
             state.setId(UUID.fromString(list.get(i).getStateId().getUuid()));
             state.setStateName(list.get(i).getStateId().getStateName());

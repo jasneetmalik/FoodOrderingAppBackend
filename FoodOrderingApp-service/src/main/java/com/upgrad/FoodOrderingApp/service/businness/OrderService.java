@@ -55,5 +55,10 @@ public class OrderService {
     @Transactional(propagation = Propagation.REQUIRED)
     public OrderItemEntity saveOrderItem(OrderItemEntity orderItemEntity) {
         return orderDao.saveOrderItem(orderItemEntity);
+        //Get Coupon by CouponID
+//    public CouponEntity getCouponByCouponId(String couponUUID) {
+//        return orderDao.getCouponByUUID(couponUUID);
+//    }
+
     }
 }

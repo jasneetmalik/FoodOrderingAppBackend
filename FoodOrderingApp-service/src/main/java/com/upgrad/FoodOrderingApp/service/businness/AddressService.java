@@ -31,7 +31,7 @@ public class AddressService {
     }
     @Transactional(propagation = Propagation.REQUIRED)
     public AddressEntity saveAddress(CustomerEntity customerEntity, AddressEntity addressEntity) throws SaveAddressException {
-        if((addressEntity.getCity().isEmpty()) || (addressEntity.getLocality().isEmpty()) || (addressEntity.getPincode().isEmpty())  || (addressEntity.getFlatBuilNumber().isEmpty())) {
+        if((addressEntity.getCity().isEmpty()) || (addressEntity.getLocality().isEmpty()) || (addressEntity.getPincode().isEmpty())  || (addressEntity.getFlatBuilNo().isEmpty())) {
             throw new SaveAddressException("SAR-001", "No field can be empty");
         }
 

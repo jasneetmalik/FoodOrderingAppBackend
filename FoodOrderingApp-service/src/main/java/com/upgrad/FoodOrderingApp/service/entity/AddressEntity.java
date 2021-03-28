@@ -23,7 +23,7 @@ public class AddressEntity implements Serializable {
 
     @Column(name = "flat_buil_number")
     @Size(max = 255)
-    private String flatBuilNumber;
+    private String flatBuilNo;
 
     @Column(name = "locality")
     @Size(max = 255)
@@ -50,7 +50,7 @@ public class AddressEntity implements Serializable {
 
     public AddressEntity(@NotNull @Size(max = 200) String uuid, @Size(max = 255) String flatBuilNumber, @Size(max = 255) String locality, @Size(max = 30) String city, String pincode, @NotNull StateEntity stateId) {
         this.uuid = uuid;
-        this.flatBuilNumber = flatBuilNumber;
+        this.flatBuilNo = flatBuilNumber;
         this.locality = locality;
         this.city = city;
         this.pincode = pincode;
@@ -74,12 +74,12 @@ public class AddressEntity implements Serializable {
         this.uuid = uuid;
     }
 
-    public String getFlatBuilNumber() {
-        return flatBuilNumber;
+    public String getFlatBuilNo() {
+        return flatBuilNo;
     }
 
-    public void setFlatBuilNumber(String flatBuilNumber) {
-        this.flatBuilNumber = flatBuilNumber;
+    public void setFlatBuilNo(String flatBuilNumber) {
+        this.flatBuilNo = flatBuilNumber;
     }
 
     public String getLocality() {

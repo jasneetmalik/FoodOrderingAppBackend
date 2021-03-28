@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9a52a3e6-2907-45b0-be64-5da4d595d30d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/ItemEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/OrderDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,51 +21,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>categoryName</find>
-      <find>view/update/delete any one</find>
-      <find>System</find>
-      <find>authori</find>
-      <find>coupon</find>
-      <find>authorization</find>
-      <find>auth</find>
-      <find>Update</find>
-      <find>delete</find>
-      <find>RestaurantUpdatedResponse</find>
-      <find>RNF-003</find>
-      <find>INF</find>
-      <find>CNF-004</find>
-      <find>ANF-00</find>
-      <find>ANF-001</find>
-      <find>81</find>
-      <find>jackson</find>
-      <find>jacks</find>
-      <find>CNF</find>
-      <find>getCategoriesByRestaurant</find>
-      <find>getItemsByCategoryAndRestaurant</find>
-      <find>categoryService</find>
-      <find>restaurantService</find>
-      <find>can</find>
-      <find>restaurantByUUID</find>
-      <find>restaurantsByName</find>
-      <find>restaurantByCategory</find>
-      <find>updateRestaurantRating</find>
-      <find>getCouponByCouponName</find>
-      <find>getCategoryById</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>pincode</replace>
-      <replace>NON_VEG</replace>
-      <replace>VEG</replace>
-      <replace>customer</replace>
-      <replace>Customer</replace>
-      <replace>FoodOrderingApp</replace>
-      <replace>category_items</replace>
-      <replace>1</replace>
-      <replace>0</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -125,6 +81,7 @@
       <recent name="C:\Users\razi.akram\Documents\FoodOrderingAppBackend\FoodOrderingApp-api\src\test\java\com\upgrad\FoodOrderingApp\api\controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bvishnubhotla\IdeaProjects\Capstone\backend\FOBE\FoodOrderingApp-service\src\main" />
       <recent name="C:\Users\Admin\Documents\FoodOrderingAppBackend\FoodOrderingApp-db\src\main\resources\config" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -138,7 +95,7 @@
       <recent name="com.upgrad.FoodOrderingApp.service.exception" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.FoodOrderingAppApiApplication">
+  <component name="RunManager" selected="JUnit.AddressControllerTest">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -151,7 +108,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CategoryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AddressControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
         <pattern>
@@ -160,7 +128,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.CategoryControllerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.AddressControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
@@ -254,17 +222,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.CustomerControllerTest" />
+      <item itemvalue="JUnit.CustomerControllerTest.shouldNotSignUpForEmptyRequest" />
+      <item itemvalue="JUnit.OrderControllerTest" />
+      <item itemvalue="Spring Boot.FoodOrderingAppApiApplication" />
+      <item itemvalue="JUnit.AddressControllerTest" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AddressControllerTest" />
         <item itemvalue="Spring Boot.FoodOrderingAppApiApplication" />
         <item itemvalue="JUnit.OrderControllerTest" />
         <item itemvalue="JUnit.CustomerControllerTest.shouldNotSignUpForEmptyRequest" />
         <item itemvalue="JUnit.CustomerControllerTest" />
-        <item itemvalue="JUnit.CategoryControllerTest" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -323,11 +298,18 @@
       <option name="project" value="LOCAL" />
       <updated>1616852657560</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added Get Coupon By Coupon Id &amp; Get Payment by Payment Id">
+      <created>1616947818494</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1616947818494</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
@@ -349,7 +331,6 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -370,6 +351,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Generated Customer, Address, Item, Restaurant related Entities." />
@@ -379,29 +361,8 @@
     <MESSAGE value="Bug Fixes. Passed All 24 test cases for the CustomerController" />
     <MESSAGE value="Implemented Item API end points" />
     <MESSAGE value="Implemented Item API (Try :2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Item API (Try :2)" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="583" y="293" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1616852258268">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="583" y="293" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1616852258268" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1616852800022">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1616852800022" />
-    <state x="261" y="79" key="Vcs.Push.Dialog.v2" timestamp="1616853044764">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="261" y="79" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1616853044764" />
-    <state x="207" y="156" key="git4idea.merge.GitMergeDialog" timestamp="1616852282507">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="207" y="156" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1616852282507" />
-    <state x="207" y="156" key="git4idea.merge.GitPullDialog" timestamp="1616857351484">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="207" y="156" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1616857351484" />
+    <MESSAGE value="Added Get Coupon By Coupon Id &amp; Get Payment by Payment Id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Get Coupon By Coupon Id &amp; Get Payment by Payment Id" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -416,92 +377,5 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>Invalid</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>FoodOrderingApp-api</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

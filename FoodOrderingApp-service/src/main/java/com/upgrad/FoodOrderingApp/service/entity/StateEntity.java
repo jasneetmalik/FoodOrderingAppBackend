@@ -1,7 +1,6 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -30,10 +29,12 @@ public class StateEntity {
     @OneToMany(mappedBy = "stateId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private final List<AddressEntity> Addresses = new ArrayList<>();
 
+    //Constructor
     public StateEntity() {
-    }
 
-    public StateEntity(@NotNull @Size(max = 200) String uuid, @NotNull @Size(max = 30) String stateName) {
+    }
+    public StateEntity(String uuid, String stateName) {
+
         this.uuid = uuid;
         this.stateName = stateName;
     }
