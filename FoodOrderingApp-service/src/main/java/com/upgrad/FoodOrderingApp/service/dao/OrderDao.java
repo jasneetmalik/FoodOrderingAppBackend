@@ -21,6 +21,15 @@ public class OrderDao {
         } catch (NoResultException nre) {
             return null;
         }
+    }
 
+    public CouponEntity getCouponByUUID(String couponUUID) {
+        try {
+            return entityManager.createNamedQuery("getCouponById", CouponEntity.class)
+                    .setParameter("couponUUID", couponUUID)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 }

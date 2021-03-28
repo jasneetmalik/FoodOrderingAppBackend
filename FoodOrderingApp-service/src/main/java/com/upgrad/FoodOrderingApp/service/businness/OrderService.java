@@ -22,4 +22,7 @@ public class OrderService {
         return coupon;
     }
     //Get Coupon by CouponID
+    public CouponEntity getCouponByCouponId(String couponUUID) {
+        return orderDao.getCouponByUUID(couponUUID);
+    }
 }
