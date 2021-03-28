@@ -3,8 +3,11 @@ package com.upgrad.FoodOrderingApp.api.controller;
 import com.upgrad.FoodOrderingApp.api.model.ItemList;
 import com.upgrad.FoodOrderingApp.api.model.ItemListResponse;
 import com.upgrad.FoodOrderingApp.service.businness.ItemService;
+import com.upgrad.FoodOrderingApp.service.businness.OrderService;
 import com.upgrad.FoodOrderingApp.service.businness.RestaurantService;
 import com.upgrad.FoodOrderingApp.service.entity.ItemEntity;
+import com.upgrad.FoodOrderingApp.service.entity.OrderItemEntity;
+import com.upgrad.FoodOrderingApp.service.entity.OrdersEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantEntity;
 import com.upgrad.FoodOrderingApp.service.exception.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/")
@@ -23,6 +25,9 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
     @Autowired private RestaurantService restaurantService;
+
+    @Autowired
+    private OrderService orderService;
 
     /* The method handles get Top Five Items By Popularity request & takes restaurant_id as the path variable
     & produces response in ItemListResponse and returns list of 5 items sold by restaurant on basis of popularity  with details from the db. If error returns error code and error message.
@@ -35,17 +40,72 @@ public class ItemController {
     public ResponseEntity<ItemListResponse> getTopFiveItemsForRestaurant(
             @PathVariable("restaurant_id") final String restaurantId) throws RestaurantNotFoundException {
         RestaurantEntity restaurant = restaurantService.restaurantByUUID(restaurantId);
-        List<ItemEntity> topFiveItems = itemService.getItemsByPopularity(restaurant);
+        List<OrdersEntity> ordersEntityList = itemService.getOrdersOfRestaurant(restaurant);
+        List<List<OrderItemEntity>> list = new ArrayList<>();
+        for (OrdersEntity ordersEntity : ordersEntityList) {
+            list.add(orderService.getOrderItem(ordersEntity));
+        }
+
+        HashMap<ItemEntity, Integer> hashMap = new HashMap<>();
+        HashSet<ItemEntity> hashSet = new HashSet<>();
+
+        for (List<OrderItemEntity> list1 : list) {
+            for (OrderItemEntity orderItemEntity : list1) {
+                ItemEntity itemEntity = orderItemEntity.getItemId();
+                int quantity = orderItemEntity.getQuantity();
+                if(hashMap.containsKey(itemEntity)) {
+                    hashMap.put(itemEntity, (hashMap.get(itemEntity) + quantity));
+                }
+                else {
+                    hashMap.put(itemEntity, quantity);
+                }
+                hashSet.add(itemEntity);
+            }
+        }
+        int max = Integer.MIN_VALUE;
+        ItemEntity itemEntity1 = null;
         ItemListResponse itemListResponse = new ItemListResponse();
-        topFiveItems.forEach(itemEntity -> {
-            ItemList itemList = new ItemList()
-                    .id(UUID.fromString(itemEntity.getUuid()))
-                    .itemName(itemEntity.getItemName())
-                    .price(itemEntity.getPrice())
-                    .itemType(ItemList.ItemTypeEnum.fromValue(itemEntity.getType().getValue()));
-            itemListResponse.add(itemList);
-        });
+        if(hashSet.size() >= 5) {
+            for (int i = 0; i < 5; i++) {
+                itemEntity1 = null;
+                for (ItemEntity itemEntity : hashSet) {
+                    if (hashMap.get(itemEntity) > max) {
+                        max = hashMap.get(itemEntity);
+                        itemEntity1 = itemEntity;
+                    }
+                }
+                max = Integer.MIN_VALUE;
+                ItemList itemList = new ItemList();
+                itemList.setItemName(itemEntity1.getItemName());
+                itemList.setItemType(ItemList.ItemTypeEnum.fromValue(itemEntity1.getType().toString()));
+                itemList.setId(UUID.fromString(itemEntity1.getUuid()));
+                itemList.setPrice(itemEntity1.getPrice());
+                hashSet.remove(itemEntity1);
+                itemListResponse.add(i, itemList);
+
+            }
+        }
+       else  {
+            for (int i = 0; i < hashSet.size(); i++) {
+                itemEntity1 = null;
+                for (ItemEntity itemEntity : hashSet) {
+                    if(hashMap.get(itemEntity) > max) {
+                        max = hashMap.get(itemEntity);
+                        itemEntity1 = itemEntity;
+                    }
+                }
+                ItemList itemList = new ItemList();
+                itemList.setItemName(itemEntity1.getItemName());
+                itemList.setItemType(ItemList.ItemTypeEnum.fromValue(itemEntity1.getType().toString()));
+                itemList.setId(UUID.fromString(itemEntity1.getUuid()));
+                itemList.setPrice(itemEntity1.getPrice());
+                hashSet.remove(itemEntity1);
+                itemListResponse.add(i, itemList);
+
+            }
+        }
 
         return new ResponseEntity<ItemListResponse>(itemListResponse,HttpStatus.OK);
+
     }
 }

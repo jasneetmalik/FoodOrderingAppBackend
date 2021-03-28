@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "order_item")
+@NamedQueries({@NamedQuery(name = "getOrderItemEntity", query = "select o from OrderItemEntity o where o.orderId = :orderEntity")})
 public class OrderItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,11 +4,14 @@ import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "orders")
-public class OrdersEntity {
+@NamedQueries({@NamedQuery(name = "getOrdersByCustomer", query = "select o from OrdersEntity o where o.customer = :customer"),
+@NamedQuery(name = "GetOrdersOfRestaurant", query = "select o from OrdersEntity o where o.restaurant = :restaurant")})
+public class OrdersEntity implements Comparable<OrdersEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -19,12 +22,16 @@ public class OrdersEntity {
     @Size(max = 200)
     private String uuid;
 
+    @Column(name = "bill")
+    @NotNull
+    private java.math.BigDecimal bill;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "coupon_id")
     private CouponEntity couponId;
 
     @Column(name = "discount")
-    private Double discount;
+    private java.math.BigDecimal discount;
 
     @Column(name = "date")
     private ZonedDateTime date;
@@ -45,8 +52,31 @@ public class OrdersEntity {
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
 
+    public OrdersEntity() {
+    }
+
+    public OrdersEntity(@NotNull @Size(max = 200) String uuid, BigDecimal bill, CouponEntity couponId, BigDecimal discount, ZonedDateTime date, PaymentEntity paymentId, CustomerEntity customer, AddressEntity address, RestaurantEntity restaurant) {
+        this.uuid = uuid;
+        this.bill = bill;
+        this.couponId = couponId;
+        this.discount = discount;
+        this.date = date;
+        this.paymentId = paymentId;
+        this.customer = customer;
+        this.address = address;
+        this.restaurant = restaurant;
+    }
+
     public Integer getId() {
         return id;
+    }
+
+    public BigDecimal getBill() {
+        return bill;
+    }
+
+    public void setBill(BigDecimal bill) {
+        this.bill = bill;
     }
 
     public void setId(Integer id) {
@@ -69,11 +99,11 @@ public class OrdersEntity {
         this.couponId = couponId;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 
@@ -115,5 +145,15 @@ public class OrdersEntity {
 
     public void setRestaurant(RestaurantEntity restaurant) {
         this.restaurant = restaurant;
+    }
+
+    @Override
+    public int compareTo(OrdersEntity o) {
+       if(o.getDate().isAfter(this.getDate())) {
+           return 1;
+       }
+       else {
+           return -1;
+       }
     }
 }
