@@ -47,7 +47,7 @@ public class RestaurantController {
             RestaurantDetailsResponseAddress address = new RestaurantDetailsResponseAddress()
                     .id(UUID.fromString(restaurant.getAddress().getUuid()))
                     .city(restaurant.getAddress().getCity())
-                    .flatBuildingName(restaurant.getAddress().getFlatBuilNumber())
+                    .flatBuildingName(restaurant.getAddress().getFlatBuilNo())
                     .locality(restaurant.getAddress().getLocality())
                     .pincode(restaurant.getAddress().getPincode())
                     .state(addressState);
@@ -83,7 +83,7 @@ public class RestaurantController {
         if (restaurantId == "") {
             throw new RestaurantNotFoundException("RNF-002", "Restaurant id field should not be empty");
         }
-        RestaurantEntity restaurant = restaurantService.getRestaurantByUUId(restaurantId);
+        RestaurantEntity restaurant = restaurantService.restaurantByUUID(restaurantId);
         if (restaurant == null) {
             throw new RestaurantNotFoundException("RNF-001","No restaurant by this id");
         }
@@ -94,7 +94,7 @@ public class RestaurantController {
         RestaurantDetailsResponseAddress address = new RestaurantDetailsResponseAddress()
                 .id(UUID.fromString(restaurant.getAddress().getUuid()))
                 .city(restaurant.getAddress().getCity())
-                .flatBuildingName(restaurant.getAddress().getFlatBuilNumber())
+                .flatBuildingName(restaurant.getAddress().getFlatBuilNo())
                 .locality(restaurant.getAddress().getLocality())
                 .pincode(restaurant.getAddress().getPincode())
                 .state(addressState);
@@ -165,7 +165,7 @@ public class RestaurantController {
             RestaurantDetailsResponseAddress address = new RestaurantDetailsResponseAddress()
                     .id(UUID.fromString(restaurant.getAddress().getUuid()))
                     .city(restaurant.getAddress().getCity())
-                    .flatBuildingName(restaurant.getAddress().getFlatBuilNumber())
+                    .flatBuildingName(restaurant.getAddress().getFlatBuilNo())
                     .locality(restaurant.getAddress().getLocality())
                     .pincode(restaurant.getAddress().getPincode())
                     .state(addressState);

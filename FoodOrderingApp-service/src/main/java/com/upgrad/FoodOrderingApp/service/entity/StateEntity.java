@@ -30,6 +30,16 @@ public class StateEntity {
     @OneToMany(mappedBy = "stateId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private final List<AddressEntity> Addresses = new ArrayList<>();
 
+    //Constructor
+    public StateEntity() {
+
+    }
+    public StateEntity(String uuid, String stateName) {
+        this.uuid = uuid;
+        this.stateName = stateName;
+    }
+
+
     //GETTERS AND SETTERS
     public Integer getId() {
         return Id;

@@ -6,7 +6,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "payment")
-@NamedQueries({@NamedQuery(name="getPaymentMethods", query="select p from PaymentEntity p")})
+@NamedQueries({
+        @NamedQuery(name="getPaymentMethods", query="select p from PaymentEntity p"),
+        @NamedQuery(name="getPaymentMethodByUUID", query="select p from PaymentEntity p where p.uuid = :paymentMethodUUID")})
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +23,7 @@ public class PaymentEntity {
     @Column(name = "payment_name")
     @Size(max = 255)
     private String paymentName;
+
 
     public Integer getId() {
         return id;
