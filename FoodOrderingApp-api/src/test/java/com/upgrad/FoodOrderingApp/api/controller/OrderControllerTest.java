@@ -56,9 +56,9 @@ public class OrderControllerTest {
 
     @MockBean
     private ItemService mockItemService;
-/*
-    // ------------------------------------------ POST /order ------------------------------------------
 
+    // ------------------------------------------ POST /order ------------------------------------------
+/*
     //This test case passes when you are able to save order successfully.
     @Test
     public void shouldSaveOrder() throws Exception {
@@ -349,8 +349,8 @@ public class OrderControllerTest {
                 .getCouponByCouponId(saveOrderRequest.getCouponId().toString());
         verify(mockOrderService, times(0)).saveOrder(any());
         verify(mockOrderService, times(0)).saveOrderItem(any());
-    }*/
-
+    }
+*/
     // ------------------------------------------ GET /order ------------------------------------------
 
     //This test case passes when you are able to retrieve all past orders placed by you

@@ -8,6 +8,8 @@ import com.upgrad.FoodOrderingApp.service.entity.OrdersEntity;
 import com.upgrad.FoodOrderingApp.service.exception.CouponNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,5 +35,25 @@ public class OrderService {
 
     public List<OrderItemEntity> getOrderItem(OrdersEntity ordersEntity) {
         return orderDao.getOrderItem(ordersEntity);
+    }
+
+    public CouponEntity getCouponByCouponId(String uuid) throws CouponNotFoundException {
+        CouponEntity couponEntity = orderDao.getCouponById(uuid);
+        if(couponEntity == null) {
+            throw new CouponNotFoundException("CPF-002", "No coupon by this id");
+        }
+        return couponEntity;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public OrdersEntity saveOrder(OrdersEntity ordersEntity) {
+        return orderDao.saveOrder(ordersEntity);
+
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public OrderItemEntity saveOrderItem(OrderItemEntity orderItemEntity) {
+        return orderDao.saveOrderItem(orderItemEntity);
     }
 }
