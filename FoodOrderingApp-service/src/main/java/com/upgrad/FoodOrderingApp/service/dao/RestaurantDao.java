@@ -31,7 +31,7 @@ public class RestaurantDao  {
         }
     }
 
-    public List<RestaurantCategoryEntity> getRestaurantByCategoryId(final Long categoryID) {
+    public List<RestaurantCategoryEntity> getRestaurantByCategoryId(final Integer categoryID) {
         try {
             return entityManager.createNamedQuery("restaurantsByCategoryId", RestaurantCategoryEntity.class).setParameter("id",categoryID).getResultList();
         } catch(NoResultException nre) {

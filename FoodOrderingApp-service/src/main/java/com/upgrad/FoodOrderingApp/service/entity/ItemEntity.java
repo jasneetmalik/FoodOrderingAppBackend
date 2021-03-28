@@ -12,12 +12,14 @@ import javax.validation.constraints.Size;
         @NamedQuery(
                 name = "topFivePopularItemsByRestaurant",
                 query =
-                        "select * from item where id in "
-                                + "(select item_id from order_item where order_id in "
-                                + "(select id from orders where restaurant_id = ? ) "
-                                + "group by order_item.item_id "
-                                + "order by (count(order_item.order_id)) "
-                                + "desc LIMIT 5)"),
+                        "select i from ItemEntity i"
+//                where id in "
+//                                + "(select item_id from order_item where order_id in "
+//                                + "(select id from orders where restaurant_id = ? ) "
+//                                + "group by order_item.item_id "
+//                                + "order by (count(order_item.order_id)) "
+//                                + "desc)"
+        ),
         @NamedQuery(name = "itemByUUID", query = "select i from ItemEntity i where i.uuid=:itemUUID"),
 
 })
