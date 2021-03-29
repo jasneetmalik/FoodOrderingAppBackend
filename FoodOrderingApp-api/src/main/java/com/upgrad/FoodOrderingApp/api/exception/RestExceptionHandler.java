@@ -60,7 +60,7 @@ public class RestExceptionHandler {
     public ResponseEntity<ErrorResponse> saveAddressException (SaveAddressException exc, WebRequest request){
         return new ResponseEntity<ErrorResponse>(new ErrorResponse()
                 .code(exc.getCode())
-                .message(exc.getErrorMessage()), HttpStatus.FORBIDDEN);
+                .message(exc.getErrorMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(AddressNotFoundException.class)

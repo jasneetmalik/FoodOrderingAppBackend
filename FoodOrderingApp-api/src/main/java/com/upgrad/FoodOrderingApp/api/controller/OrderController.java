@@ -12,11 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -76,15 +74,15 @@ public class OrderController {
         for (OrdersEntity ordersEntity : list) {
             OrderList orderList = new OrderList();
              orderList.setId(UUID.fromString(ordersEntity.getUuid()));
-             orderList.setBill(ordersEntity.getBill());
+             orderList.setBill(new BigDecimal(ordersEntity.getBill()));
              CouponEntity couponEntity = ordersEntity.getCouponId();
              OrderListCoupon orderListCoupon= new OrderListCoupon();
              orderListCoupon.setId(UUID.fromString(couponEntity.getUuid()));
              orderListCoupon.setCouponName(couponEntity.getCouponName());
              orderListCoupon.setPercent(couponEntity.getPercent());
              orderList.setCoupon(orderListCoupon);
-             orderList.setDiscount(ordersEntity.getDiscount());
-             orderList.setDate(ordersEntity.getDate().toLocalDateTime().toString());
+             orderList.setDiscount(new BigDecimal(ordersEntity.getDiscount()));
+             orderList.setDate(ordersEntity.getDate().toLocaleString());
             OrderListPayment orderListPayment = new OrderListPayment();
             PaymentEntity paymentEntity= ordersEntity.getPaymentId();
             orderListPayment.setId(UUID.fromString(paymentEntity.getUuid()));
@@ -159,13 +157,13 @@ public class OrderController {
             OrdersEntity ordersEntity = new OrdersEntity();
             ordersEntity.setPaymentId(paymentEntity);
             ordersEntity.setUuid(UUID.randomUUID().toString());
-            ordersEntity.setDate(ZonedDateTime.now());
+            ordersEntity.setDate(new Date());
             ordersEntity.setAddress(addressEntity);
             ordersEntity.setCustomer(customer);
             ordersEntity.setCouponId(couponEntity);
             ordersEntity.setRestaurant(restaurantEntity);
-            ordersEntity.setBill(saveOrderRequest.getBill());
-            ordersEntity.setDiscount(saveOrderRequest.getDiscount());
+            ordersEntity.setBill(Double.parseDouble(saveOrderRequest.getBill().toString()));
+            ordersEntity.setDiscount(Double.parseDouble(saveOrderRequest.getDiscount().toString()));
 
             ordersEntity = orderService.saveOrder(ordersEntity);
 
