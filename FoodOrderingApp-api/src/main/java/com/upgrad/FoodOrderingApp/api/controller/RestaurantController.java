@@ -136,62 +136,59 @@ public class RestaurantController {
     public ResponseEntity<RestaurantListResponse> getRestaurantsByCategoryId(@PathVariable("category_id") final String categoryId)
             throws CategoryNotFoundException {
 
-        if (categoryId.equals("")) {
+        if (categoryId.equals("")|| categoryId.isEmpty()) {
             throw new CategoryNotFoundException("CNF-001", "Category id field should not be empty");
         }
 
-        CategoryEntity categoryEntity = categoryService.getCategoryById(categoryId);
-        if (categoryEntity == null) {
-            throw new CategoryNotFoundException("CNF-001","No category by this id");
-        }
+        List<RestaurantEntity> restaurantsInCategory = restaurantService.restaurantByCategory(categoryId);
 
-        List<RestaurantEntity> restaurantsInCategory = restaurantService.restaurantByCategory(categoryEntity.getUuid());
-        if (restaurantsInCategory.size() == 0) {
-            RestaurantListResponse emptyRestaurantDetailsResponse = new RestaurantListResponse();
-            return new ResponseEntity<RestaurantListResponse>(emptyRestaurantDetailsResponse, HttpStatus.NO_CONTENT);
-        }
-        RestaurantListResponse restaurantListResponse = new RestaurantListResponse();
-
-        List<RestaurantList> restaurantLists = new ArrayList<RestaurantList>();
-        for (RestaurantEntity restaurant: restaurantsInCategory) {
-
-            RestaurantList restaurantList = new RestaurantList();
-            restaurantList.setId(UUID.fromString(restaurant.getUuid()));
-            restaurantList.setRestaurantName(restaurant.getRestaurantName());
-            restaurantList.setPhotoURL(restaurant.getPhotoUrl());
-            restaurantList.setCustomerRating(BigDecimal.valueOf(restaurant.getCustomerRating()));
-            restaurantList.setAveragePrice(restaurant.getAvgPrice());
-            restaurantList.setNumberCustomersRated(restaurant.getNumberCustomersRated());
-
-            RestaurantDetailsResponseAddressState addressState = new RestaurantDetailsResponseAddressState()
-                    .id(UUID.fromString(restaurant.getAddress().getState().getUuid()))
-                    .stateName(restaurant.getAddress().getState().getStateName());
-
-            RestaurantDetailsResponseAddress address = new RestaurantDetailsResponseAddress()
-                    .id(UUID.fromString(restaurant.getAddress().getUuid()))
-                    .city(restaurant.getAddress().getCity())
-                    .flatBuildingName(restaurant.getAddress().getFlatBuilNo())
-                    .locality(restaurant.getAddress().getLocality())
-                    .pincode(restaurant.getAddress().getPincode())
-                    .state(addressState);
-
-            List<String> categoryLists = new ArrayList();
-            for (CategoryEntity category :restaurant.getCategories()) {
-                categoryLists.add(category.getCategoryName());
+            if (restaurantsInCategory.size() == 0) {
+                RestaurantListResponse emptyRestaurantDetailsResponse = new RestaurantListResponse();
+                return new ResponseEntity<RestaurantListResponse>(emptyRestaurantDetailsResponse, HttpStatus.NO_CONTENT);
             }
 
-            Collections.sort(categoryLists);
+        RestaurantListResponse restaurantListResponse = new RestaurantListResponse();
 
-            restaurantList.setAddress(address);
-            restaurantList.setCategories(String.join(",", categoryLists));
+            List<RestaurantList> restaurantLists = new ArrayList<RestaurantList>();
+            for (RestaurantEntity restaurant: restaurantsInCategory) {
 
-            restaurantLists.add(restaurantList);
-            restaurantListResponse.addRestaurantsItem(restaurantList);
+                RestaurantList restaurantList = new RestaurantList();
+                restaurantList.setId(UUID.fromString(restaurant.getUuid()));
+                restaurantList.setRestaurantName(restaurant.getRestaurantName());
+                restaurantList.setPhotoURL(restaurant.getPhotoUrl());
+                restaurantList.setCustomerRating(BigDecimal.valueOf(restaurant.getCustomerRating()));
+                restaurantList.setAveragePrice(restaurant.getAvgPrice());
+                restaurantList.setNumberCustomersRated(restaurant.getNumberCustomersRated());
 
-        }
+                RestaurantDetailsResponseAddressState addressState = new RestaurantDetailsResponseAddressState()
+                        .id(UUID.fromString(restaurant.getAddress().getState().getUuid()))
+                        .stateName(restaurant.getAddress().getState().getStateName());
 
+                RestaurantDetailsResponseAddress address = new RestaurantDetailsResponseAddress()
+                        .id(UUID.fromString(restaurant.getAddress().getUuid()))
+                        .city(restaurant.getAddress().getCity())
+                        .flatBuildingName(restaurant.getAddress().getFlatBuilNo())
+                        .locality(restaurant.getAddress().getLocality())
+                        .pincode(restaurant.getAddress().getPincode())
+                        .state(addressState);
+
+                List<String> categoryLists = new ArrayList();
+                for (CategoryEntity category :restaurant.getCategories()) {
+                    categoryLists.add(category.getCategoryName());
+                }
+
+                Collections.sort(categoryLists);
+
+                restaurantList.setAddress(address);
+                restaurantList.setCategories(String.join(",", categoryLists));
+
+                restaurantLists.add(restaurantList);
+                restaurantListResponse.addRestaurantsItem(restaurantList);
+
+            }
         return new ResponseEntity<RestaurantListResponse>(restaurantListResponse, HttpStatus.OK);
     }
+
     @RequestMapping(method = RequestMethod.PUT, path = "/restaurant/{restaurant_id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<RestaurantUpdatedResponse> updateRestaurantDetails(
             @RequestParam(name = "customer_rating") final Double customerRating,

@@ -53,7 +53,7 @@ public class RestaurantService {
     public List<RestaurantEntity> restaurantByCategory(final String categoryId)
             throws CategoryNotFoundException {
 
-        if (categoryId.equals("")|| categoryId.isEmpty() || categoryId == null) {
+        if (categoryId.equals("")|| categoryId.isEmpty()) {
             throw new CategoryNotFoundException("CNF-001", "Category id field should not be empty");
         }
 
