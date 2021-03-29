@@ -45,6 +45,13 @@ public class ItemController {
         for (OrdersEntity ordersEntity : ordersEntityList) {
             list.add(orderService.getOrderItem(ordersEntity));
         }
+        List<ItemEntity> testList = new ArrayList<>();
+        try {
+             testList = itemService.getItemsByPopularity(restaurant);
+        }
+        catch (Exception e) {
+
+        }
 
         HashMap<ItemEntity, Integer> hashMap = new HashMap<>();
         HashSet<ItemEntity> hashSet = new HashSet<>();
@@ -86,6 +93,18 @@ public class ItemController {
             }
         }
        else  {
+           max = Integer.MIN_VALUE;
+            if(hashSet.size() == 0) {
+                int k = 0;
+                for (ItemEntity i : testList) {
+                    ItemList itemList = new ItemList();
+                    itemList.setItemName(i.getItemName());
+                    itemList.setItemType(ItemList.ItemTypeEnum.fromValue(i.getType().toString()));
+                    itemList.setId(UUID.fromString(i.getUuid()));
+                    itemList.setPrice(i.getPrice());
+                    itemListResponse.add(k++, itemList);
+                }
+            }
             for (int i = 0; i < hashSet.size(); i++) {
                 itemEntity1 = null;
                 for (ItemEntity itemEntity : hashSet) {
@@ -103,6 +122,7 @@ public class ItemController {
                 itemListResponse.add(i, itemList);
 
             }
+
         }
 
         return new ResponseEntity<ItemListResponse>(itemListResponse,HttpStatus.OK);
