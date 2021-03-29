@@ -25,17 +25,17 @@ public class OrdersEntity implements Comparable<OrdersEntity> {
 
     @Column(name = "bill")
     @NotNull
-    private java.math.BigDecimal bill;
+    private double bill;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "coupon_id")
     private CouponEntity couponId;
 
     @Column(name = "discount")
-    private java.math.BigDecimal discount;
+    private double discount;
 
     @Column(name = "date")
-    private ZonedDateTime date;
+    private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "payment_id")
@@ -56,7 +56,7 @@ public class OrdersEntity implements Comparable<OrdersEntity> {
     public OrdersEntity() {
     }
 
-    public OrdersEntity(@NotNull @Size(max = 200) String uuid, BigDecimal bill, CouponEntity couponId, BigDecimal discount, ZonedDateTime date, PaymentEntity paymentId, CustomerEntity customer, AddressEntity address, RestaurantEntity restaurant) {
+    public OrdersEntity(@NotNull @Size(max = 200) String uuid, @NotNull double bill, CouponEntity couponId, double discount, Date date, PaymentEntity paymentId, CustomerEntity customer, AddressEntity address, RestaurantEntity restaurant) {
         this.uuid = uuid;
         this.bill = bill;
         this.couponId = couponId;
@@ -68,21 +68,32 @@ public class OrdersEntity implements Comparable<OrdersEntity> {
         this.restaurant = restaurant;
     }
 
-    public OrdersEntity(String orderId, double v, CouponEntity couponEntity, double v1, Date orderDate,
-                        PaymentEntity paymentEntity, CustomerEntity customerEntity, AddressEntity addressEntity,
-                        RestaurantEntity restaurantEntity) {
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public BigDecimal getBill() {
+    public double getBill() {
         return bill;
     }
 
-    public void setBill(BigDecimal bill) {
+    public void setBill(double bill) {
         this.bill = bill;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     public void setId(Integer id) {
@@ -103,22 +114,6 @@ public class OrdersEntity implements Comparable<OrdersEntity> {
 
     public void setCouponId(CouponEntity couponId) {
         this.couponId = couponId;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
-
-    public ZonedDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(ZonedDateTime date) {
-        this.date = date;
     }
 
     public PaymentEntity getPaymentId() {
@@ -155,7 +150,7 @@ public class OrdersEntity implements Comparable<OrdersEntity> {
 
     @Override
     public int compareTo(OrdersEntity o) {
-       if(o.getDate().isAfter(this.getDate())) {
+       if(o.getDate().after(this.getDate())) {
            return 1;
        }
        else {

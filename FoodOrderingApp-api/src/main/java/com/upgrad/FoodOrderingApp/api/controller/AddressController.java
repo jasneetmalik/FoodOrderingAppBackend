@@ -31,7 +31,7 @@ public class AddressController {
     AddressService addressService;
 
     @RequestMapping(path = "/address", produces = APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
-    public ResponseEntity<SaveAddressResponse> saveAddress(@RequestHeader("authorization") String token, @RequestBody()SaveAddressRequest saveAddressRequest) throws SaveAddressException, AuthorizationFailedException, AddressNotFoundException {
+    public ResponseEntity<SaveAddressResponse> saveAddress(@RequestHeader("authorization") String token, @RequestBody(required = false)SaveAddressRequest saveAddressRequest) throws SaveAddressException, AuthorizationFailedException, AddressNotFoundException {
         final String[] bearerTokens = token.split("Bearer ");
         final String accessToken;
         if (bearerTokens.length == 2) {
