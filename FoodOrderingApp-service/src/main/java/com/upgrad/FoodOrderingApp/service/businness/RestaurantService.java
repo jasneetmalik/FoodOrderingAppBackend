@@ -35,8 +35,7 @@ public class RestaurantService {
 
     // Method to getAllRestaurants endpoint;
     // Parameters: none
-    public List<RestaurantEntity> getAllRestaurants() {
-
+    public List<RestaurantEntity> restaurantsByRating() {
         return restaurantDao.getAllRestaurants();
     }
 
@@ -77,11 +76,6 @@ public class RestaurantService {
             throw new RestaurantNotFoundException("RNF-001","No restaurant by this id");
         }
         return restaurantEntity;
-    }
-    //Restaurant By Rating
-    public List<RestaurantEntity> restaurantsByRating() {
-        List<RestaurantEntity> restaurantEntities = restaurantDao.getAllRestaurantsByRating();
-        return restaurantEntities;
     }
 
     // Method to update Customer Rating

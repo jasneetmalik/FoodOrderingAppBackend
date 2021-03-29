@@ -36,7 +36,7 @@ public class RestaurantController {
     @RequestMapping(method = RequestMethod.GET, path = "/restaurant", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<RestaurantListResponse> getAllRestaurants() {
 
-        List<RestaurantEntity> restaurantsList = restaurantService.getAllRestaurants();
+        List<RestaurantEntity> restaurantsList = restaurantService.restaurantsByRating();
 
         RestaurantListResponse restaurantListResponse = new RestaurantListResponse();
 

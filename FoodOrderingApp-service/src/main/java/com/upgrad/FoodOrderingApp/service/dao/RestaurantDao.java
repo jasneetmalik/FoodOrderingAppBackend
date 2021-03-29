@@ -46,11 +46,6 @@ public class RestaurantDao  {
             return null;
         }
     }
-    public List<RestaurantEntity> getAllRestaurantsByRating() {
-        List<RestaurantEntity> restaurantEntities = entityManager
-                .createNamedQuery("getAllRestaurantsByRating", RestaurantEntity.class).getResultList();
-        return restaurantEntities;
-    }
 
     public void updateRestaurant(final RestaurantEntity updatedRestaurantEntity) {
         entityManager.merge(updatedRestaurantEntity);
