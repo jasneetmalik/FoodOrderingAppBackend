@@ -134,7 +134,7 @@ public class RestaurantController {
 
     @RequestMapping(method = RequestMethod.GET, path = "restaurant/category/{category_id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<RestaurantListResponse> getRestaurantsByCategoryId(@PathVariable("category_id") final String categoryId)
-            throws CategoryNotFoundException {
+            throws CategoryNotFoundException, RestaurantNotFoundException {
 
         if (categoryId.equals("")|| categoryId.isEmpty()) {
             throw new CategoryNotFoundException("CNF-001", "Category id field should not be empty");
@@ -172,15 +172,13 @@ public class RestaurantController {
                         .pincode(restaurant.getAddress().getPincode())
                         .state(addressState);
 
-                List<String> categoryLists = new ArrayList();
-                for (CategoryEntity category :restaurant.getCategories()) {
-                    categoryLists.add(category.getCategoryName());
-                }
-
-                Collections.sort(categoryLists);
+                List<CategoryEntity> categoryLists = categoryService.getCategoriesByRestaurant(restaurant.getUuid());
 
                 restaurantList.setAddress(address);
-                restaurantList.setCategories(String.join(",", categoryLists));
+                for (CategoryEntity category : categoryLists) {
+                    String categories = category.getCategoryName();
+                    restaurantList.setCategories(String.join(",", categories));
+                }
 
                 restaurantLists.add(restaurantList);
                 restaurantListResponse.addRestaurantsItem(restaurantList);
@@ -244,8 +242,9 @@ public class RestaurantController {
                     .city(restaurantEntity.getAddress().getCity()).
                             pincode(restaurantEntity.getAddress().getPincode()).state(responseAddressState);
 
-            String categories = categoryService.getCategoriesByRestaurant(restaurantEntity.getUuid())
-                    .stream().map(rc -> String.valueOf(rc.getCategoryName()))
+            List<CategoryEntity> categories = categoryService.getCategoriesByRestaurant(restaurantEntity.getUuid());
+
+            String CategoryString = categories.stream().map(rc -> String.valueOf(rc.getCategoryName()))
                     .collect(Collectors.joining(","));
 
             RestaurantList restaurantList = new RestaurantList()
@@ -255,7 +254,7 @@ public class RestaurantController {
                     .customerRating(new BigDecimal(restaurantEntity.getCustomerRating())).
                             averagePrice(restaurantEntity.getAvgPrice())
                     .numberCustomersRated(restaurantEntity.getNumberCustomersRated())
-                    .address(responseAddress).categories(categories);
+                    .address(responseAddress).categories(CategoryString);
 
             listResponse.addRestaurantsItem(restaurantList);
         }

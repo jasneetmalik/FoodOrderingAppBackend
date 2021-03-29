@@ -41,7 +41,9 @@ public class RestaurantService {
 
     // Method to get Restaurants By Name;
     // Parameters: restaurantName
-    public List<RestaurantEntity> restaurantsByName(String restaurantName) {
+    public List<RestaurantEntity> restaurantsByName(String restaurantName) throws RestaurantNotFoundException {
+        if (restaurantName == "" || restaurantName == null) {
+            throw new RestaurantNotFoundException("RNF-003","Restaurant name field should not be empty");}
         return restaurantDao.getRestaurantsByName(restaurantName);
     }
 
