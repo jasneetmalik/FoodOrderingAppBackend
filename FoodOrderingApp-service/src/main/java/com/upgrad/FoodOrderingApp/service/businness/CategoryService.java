@@ -36,7 +36,7 @@ public class CategoryService {
     public List<CategoryEntity> getCategoriesByRestaurant(String restaurantUUID) throws RestaurantNotFoundException {
         RestaurantEntity restaurant = restaurantService.restaurantByUUID(restaurantUUID);
         if (restaurant == null)
-            throw new RestaurantNotFoundException("","");
+            throw new RestaurantNotFoundException("RNF-001","No restaurant by this id");
         List<CategoryEntity> categoryList = restaurant.getCategories();
         return categoryList;
     }

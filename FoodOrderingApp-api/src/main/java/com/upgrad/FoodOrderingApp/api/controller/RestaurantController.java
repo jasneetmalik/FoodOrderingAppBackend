@@ -34,7 +34,7 @@ public class RestaurantController {
     private CustomerService customerService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/restaurant", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<RestaurantListResponse> getAllRestaurants() {
+    public ResponseEntity<RestaurantListResponse> getAllRestaurants() throws RestaurantNotFoundException {
 
         List<RestaurantEntity> restaurantsList = restaurantService.restaurantsByRating();
 
@@ -59,7 +59,7 @@ public class RestaurantController {
                     .state(addressState);
 
             String categoriesString = "";
-            List<CategoryEntity> categoryList = restaurant.getCategories();
+            List<CategoryEntity> categoryList = categoryService.getCategoriesByRestaurant(restaurant.getUuid());
             int i = 0;
             for (CategoryEntity category : categoryList) {
                 i++;
