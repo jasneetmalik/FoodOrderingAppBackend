@@ -4,6 +4,7 @@ import com.upgrad.FoodOrderingApp.service.dao.CategoryDao;
 import com.upgrad.FoodOrderingApp.service.dao.CustomerRepository;
 import com.upgrad.FoodOrderingApp.service.dao.RestaurantDao;
 import com.upgrad.FoodOrderingApp.service.entity.CategoryEntity;
+import com.upgrad.FoodOrderingApp.service.entity.ItemEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantCategoryEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
@@ -101,4 +102,12 @@ public class RestaurantService {
         restaurantDao.updateRestaurant(restaurantEntity);
         return restaurantEntity;
     }
+
+
+    public List<ItemEntity> getItemsByCategoryAndRestaurant(String uuid1, String uuid2) {
+        CategoryEntity categoryEntity = categoryDao.getCategoryByUuid(uuid2);
+        return categoryEntity.getItems();
+
+    }
+
 }
