@@ -60,7 +60,7 @@ public class RestExceptionHandler {
     public ResponseEntity<ErrorResponse> saveAddressException (SaveAddressException exc, WebRequest request){
         return new ResponseEntity<ErrorResponse>(new ErrorResponse()
                 .code(exc.getCode())
-                .message(exc.getErrorMessage()), HttpStatus.BAD_REQUEST);
+                .message(exc.getErrorMessage()), HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(AddressNotFoundException.class)
@@ -71,9 +71,16 @@ public class RestExceptionHandler {
     }
     @ExceptionHandler(PaymentMethodNotFoundException.class)
     public ResponseEntity<ErrorResponse> paymentMethodNotFoundException (PaymentMethodNotFoundException exc, WebRequest request){
-        return new ResponseEntity<ErrorResponse>(new ErrorResponse()
+       return new ResponseEntity<ErrorResponse>(new ErrorResponse()
                 .code(exc.getCode())
                 .message(exc.getErrorMessage()), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(InvalidRatingException.class)
+    public ResponseEntity<ErrorResponse> invalidRatingException (InvalidRatingException exc, WebRequest request){
+        return new ResponseEntity<ErrorResponse>(
+                new ErrorResponse().code(exc.getCode()).message(exc.getErrorMessage()), HttpStatus.BAD_REQUEST
+        );
+    }
+
 
 }

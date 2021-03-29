@@ -48,7 +48,7 @@ public class CategoryController {
             @PathVariable("category_id") final String categoryId) throws CategoryNotFoundException {
 
             //Get Category By Id
-            CategoryEntity categoryById = categoryService.getCategoryByUuid(categoryId);
+            CategoryEntity categoryById = categoryService.getCategoryById(categoryId);
 
             //Create Response
             CategoryDetailsResponse categoryDetailsResponse = new CategoryDetailsResponse()

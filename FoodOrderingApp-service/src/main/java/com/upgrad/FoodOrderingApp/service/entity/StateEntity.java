@@ -26,7 +26,7 @@ public class StateEntity {
     @Size(max = 30)
     private String stateName;
 
-    @OneToMany(mappedBy = "stateId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private final List<AddressEntity> Addresses = new ArrayList<>();
 
     //Constructor

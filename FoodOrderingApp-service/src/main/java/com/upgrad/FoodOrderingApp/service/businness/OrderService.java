@@ -1,5 +1,6 @@
 package com.upgrad.FoodOrderingApp.service.businness;
 
+import com.upgrad.FoodOrderingApp.service.dao.CustomerRepository;
 import com.upgrad.FoodOrderingApp.service.dao.OrderDao;
 import com.upgrad.FoodOrderingApp.service.entity.CouponEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
@@ -17,6 +18,9 @@ import java.util.List;
 public class OrderService {
     @Autowired
     private OrderDao orderDao;
+    @Autowired
+    private CustomerRepository customerDao;
+
     //Get Coupon by Coupon Name - “/order/coupon/{coupon_name}
     public CouponEntity getCouponByCouponName(String name) throws CouponNotFoundException {
         if (name.equals("")) {
@@ -29,8 +33,10 @@ public class OrderService {
         return coupon;
     }
 
-    public List<OrdersEntity> getOrdersByCustomers(CustomerEntity customerEntity) {
-        return orderDao.getOrdersByCustomer(customerEntity);
+    public List<OrdersEntity> getOrdersByCustomers(String customerUUID) {
+
+        CustomerEntity customer = customerDao.getCustomerByUUID(customerUUID);
+        return orderDao.getOrdersByCustomer(customer);
     }
 
     public List<OrderItemEntity> getOrderItem(OrdersEntity ordersEntity) {

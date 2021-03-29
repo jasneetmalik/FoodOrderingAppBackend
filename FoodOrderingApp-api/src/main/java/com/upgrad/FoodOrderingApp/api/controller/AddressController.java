@@ -29,8 +29,9 @@ public class AddressController {
     CustomerService customerService;
     @Autowired
     AddressService addressService;
+
     @RequestMapping(path = "/address", produces = APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
-    public ResponseEntity<SaveAddressResponse> save(@RequestHeader("authorization") String token, @RequestBody()SaveAddressRequest saveAddressRequest) throws SaveAddressException, AuthorizationFailedException, AddressNotFoundException {
+    public ResponseEntity<SaveAddressResponse> saveAddress(@RequestHeader("authorization") String token, @RequestBody()SaveAddressRequest saveAddressRequest) throws SaveAddressException, AuthorizationFailedException, AddressNotFoundException {
         final String[] bearerTokens = token.split("Bearer ");
         final String accessToken;
         if (bearerTokens.length == 2) {
@@ -52,7 +53,7 @@ public class AddressController {
         addressEntity.setLocality(saveAddressRequest.getLocality());
         addressEntity.setFlatBuilNo(saveAddressRequest.getFlatBuildingName());
         addressEntity.setPincode(saveAddressRequest.getPincode());
-        addressEntity.setStateId(stateEntity);
+        addressEntity.setState(stateEntity);
         addressEntity.setUuid(UUID.randomUUID().toString());
         addressEntity.setActive(1);
 
@@ -93,8 +94,8 @@ public class AddressController {
             addressList.setLocality(list.get(i).getLocality());
             addressList.setFlatBuildingName(list.get(i).getFlatBuilNo());
             AddressListState state = new AddressListState();
-            state.setId(UUID.fromString(list.get(i).getStateId().getUuid()));
-            state.setStateName(list.get(i).getStateId().getStateName());
+            state.setId(UUID.fromString(list.get(i).getState().getUuid()));
+            state.setStateName(list.get(i).getState().getStateName());
             addressList.setState(state);
             al.add(addressList);
         }

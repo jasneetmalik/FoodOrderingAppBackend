@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import com.upgrad.FoodOrderingApp.service.entity.CategoryItemEntity;
 import com.upgrad.FoodOrderingApp.service.entity.ItemEntity;
+import com.upgrad.FoodOrderingApp.service.entity.RestaurantCategoryEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -38,13 +39,6 @@ public class CategoryDao {
         try {
             return entityManager.createNamedQuery("getItemsByCategory", CategoryItemEntity.class)
                     .getResultList();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
-    public ItemEntity getItemById(Integer Id) {
-        try {
-            return entityManager.createNamedQuery("getItemById", ItemEntity.class).getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }

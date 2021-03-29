@@ -40,7 +40,7 @@ public class AddressEntity implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     @NotNull
-    private StateEntity stateId;
+    private StateEntity state;
 
     @Column(name = "active")
     private int active;
@@ -54,7 +54,7 @@ public class AddressEntity implements Serializable {
         this.locality = locality;
         this.city = city;
         this.pincode = pincode;
-        this.stateId = stateId;
+        this.state = stateId;
     }
 
     //GETTERS AND SETTERS
@@ -106,12 +106,12 @@ public class AddressEntity implements Serializable {
         this.pincode = pincode;
     }
 
-    public StateEntity getStateId() {
-        return stateId;
+    public StateEntity getState() {
+        return state;
     }
 
-    public void setStateId(StateEntity stateId) {
-        this.stateId = stateId;
+    public void setState(StateEntity stateId) {
+        this.state = stateId;
     }
 
     public int getActive() {

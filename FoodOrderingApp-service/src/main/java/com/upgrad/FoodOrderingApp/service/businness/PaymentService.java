@@ -12,7 +12,7 @@ import java.util.List;
 public class PaymentService {
     @Autowired
     private PaymentDao paymentDao;
-    public List<PaymentEntity> getPaymentMethods() {
+    public List<PaymentEntity> getAllPaymentMethods() {
         return paymentDao.getPaymentMethods();
     }
 

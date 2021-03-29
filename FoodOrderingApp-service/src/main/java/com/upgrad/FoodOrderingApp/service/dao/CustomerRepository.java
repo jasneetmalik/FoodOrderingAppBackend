@@ -28,6 +28,16 @@ public class CustomerRepository {
             return null;
         }
     }
+
+    public CustomerEntity getCustomerByUUID(String uuid) {
+        try {
+            return entityManager.createNamedQuery("getCustomerByUUID", CustomerEntity.class)
+                    .setParameter("uuid", uuid).getSingleResult();
+
+        } catch (NoResultException noResultException) {
+            return null;
+        }
+    }
 //Check Password
     public CustomerEntity checkPassword(String password) {
         try {

@@ -103,6 +103,7 @@
                         <artifactId>swagger-codegen-generators</artifactId>
                         <version>1.0.0-rc0</version>
                     </dependency>
+
                 </dependencies>
 
                 <executions>

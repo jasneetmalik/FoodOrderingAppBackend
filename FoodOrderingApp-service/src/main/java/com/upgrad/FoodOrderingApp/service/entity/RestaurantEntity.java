@@ -14,7 +14,8 @@ import javax.validation.constraints.Size;
         {
                 @NamedQuery(name = "allRestaurants", query = "select r from RestaurantEntity r order by r.customerRating desc"),
                 @NamedQuery(name = "findByName", query = "select r from RestaurantEntity  r where lower(r.restaurantName) like :restaurantName order by r.restaurantName"),
-                @NamedQuery(name = "findRestaurantByUUId",query = "select r from RestaurantEntity r where lower(r.uuid) = :restaurantUUID")
+                @NamedQuery(name = "findRestaurantByUUId",query = "select r from RestaurantEntity r where lower(r.uuid) = :restaurantUUID"),
+                @NamedQuery(name = "getAllRestaurantsByRating", query = "select q from RestaurantEntity q order by q.customerRating desc")
         }
 )
 
@@ -60,6 +61,11 @@ public class RestaurantEntity implements Serializable {
     @JoinTable(name="restaurant_category", joinColumns = @JoinColumn(name="restaurant_id"),
             inverseJoinColumns = @JoinColumn(name="category_id"))
     private List<CategoryEntity> categories = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "restaurant_item", joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<ItemEntity> items = new ArrayList<>();
 
     //GETTERS AND SETTERS
 
@@ -133,6 +139,14 @@ public class RestaurantEntity implements Serializable {
 
     public void setCategories(List<CategoryEntity> categories) {
         this.categories = categories;
+    }
+
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemEntity> items) {
+        this.items = items;
     }
 }
 

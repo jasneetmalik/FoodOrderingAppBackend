@@ -12,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.DateFormatter;
-import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,7 +69,7 @@ public class OrderController {
         if(Utility.isNullOrEmpty(customer)) {
             throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
         }
-        List<OrdersEntity> list = orderService.getOrdersByCustomers(customer);
+        List<OrdersEntity> list = orderService.getOrdersByCustomers(customer.getUuid());
         Collections.sort(list);
         List<OrderList> listOrder = new ArrayList<>();
 
@@ -107,8 +105,8 @@ public class OrderController {
             orderListAddress.setCity(addressEntity.getCity());
             orderListAddress.setPincode(addressEntity.getPincode());
             OrderListAddressState orderListAddressState = new OrderListAddressState();
-            orderListAddressState.setId(UUID.fromString(addressEntity.getStateId().getUuid()));
-            orderListAddressState.stateName(addressEntity.getStateId().getStateName());
+            orderListAddressState.setId(UUID.fromString(addressEntity.getState().getUuid()));
+            orderListAddressState.stateName(addressEntity.getState().getStateName());
             orderListAddress.setState(orderListAddressState);
             orderList.setAddress(orderListAddress);
             List<OrderItemEntity> orderItemEntity = orderService.getOrderItem(ordersEntity);

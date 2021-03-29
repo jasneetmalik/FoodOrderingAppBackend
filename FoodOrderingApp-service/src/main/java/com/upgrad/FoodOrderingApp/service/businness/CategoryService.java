@@ -1,10 +1,10 @@
 package com.upgrad.FoodOrderingApp.service.businness;
 
 import com.upgrad.FoodOrderingApp.service.dao.CategoryDao;
-import com.upgrad.FoodOrderingApp.service.entity.CategoryEntity;
-import com.upgrad.FoodOrderingApp.service.entity.CategoryItemEntity;
-import com.upgrad.FoodOrderingApp.service.entity.ItemEntity;
+import com.upgrad.FoodOrderingApp.service.dao.RestaurantDao;
+import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.CategoryNotFoundException;
+import com.upgrad.FoodOrderingApp.service.exception.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +14,15 @@ import java.util.List;
 public class CategoryService {
     @Autowired
     private CategoryDao categoryDao;
+    @Autowired
+    private RestaurantService restaurantService;
 
     // Get All Categories
     public List<CategoryEntity> getAllCategoriesOrderedByName() {
         return categoryDao.getAllCategories();
     }
     //Get Category by Id
-    public CategoryEntity getCategoryByUuid(String uuid) throws CategoryNotFoundException {
+    public CategoryEntity getCategoryById(String uuid) throws CategoryNotFoundException {
         if (uuid.equals("")) {
             throw new CategoryNotFoundException("CNF-001", "Category id field should not be empty");
         }
@@ -31,6 +33,12 @@ public class CategoryService {
         }
         return categoryEntity;
     }
-
+    public List<CategoryEntity> getCategoriesByRestaurant(String restaurantUUID) throws RestaurantNotFoundException {
+        RestaurantEntity restaurant = restaurantService.restaurantByUUID(restaurantUUID);
+        if (restaurant == null)
+            throw new RestaurantNotFoundException("","");
+        List<CategoryEntity> categoryList = restaurant.getCategories();
+        return categoryList;
+    }
 }
 

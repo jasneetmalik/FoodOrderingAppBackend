@@ -18,10 +18,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -56,10 +56,6 @@ public class OrderControllerTest {
     @MockBean
     private ItemService mockItemService;
 
-    private OrderController orderController = new OrderController();
-
-
-
     // ------------------------------------------ POST /order ------------------------------------------
 
     //This test case passes when you are able to save order successfully.
@@ -71,9 +67,7 @@ public class OrderControllerTest {
         when(mockCustomerService.getCustomer("database_accesstoken2"))
                 .thenReturn(customerEntity);
 
-
         final SaveOrderRequest saveOrderRequest = getSaveOrderRequest();
-        System.out.println(saveOrderRequest);
         when(mockPaymentService.getPaymentByUUID(saveOrderRequest.getPaymentId().toString()))
                 .thenReturn(new PaymentEntity());
         when(mockAddressService.getAddressByUUID(saveOrderRequest.getAddressId(), customerEntity))
@@ -367,24 +361,8 @@ public class OrderControllerTest {
         when(mockCustomerService.getCustomer("database_accesstoken2"))
                 .thenReturn(customerEntity);
 
-        final OrdersEntity orderEntity = new OrdersEntity();
-        orderEntity.setUuid(UUID.randomUUID().toString());
-        orderEntity.setCustomer(customerEntity);
-        AddressEntity addressEntity = new AddressEntity();
-        addressEntity.setUuid(UUID.randomUUID().toString());
-        orderEntity.setAddress(addressEntity);
-        StateEntity stateEntity = new StateEntity();
-        stateEntity.setUuid(UUID.randomUUID().toString());
-        addressEntity.setStateId(stateEntity);
-        CouponEntity couponEntity = new CouponEntity();
-        couponEntity.setUuid(UUID.randomUUID().toString());
-        orderEntity.setCouponId(couponEntity);
-        orderEntity.setDate(ZonedDateTime.now());
-        PaymentEntity paymentEntity = new PaymentEntity();
-        paymentEntity.setUuid(UUID.randomUUID().toString());
-        orderEntity.setPaymentId(paymentEntity);
-
-        when(mockOrderService.getOrdersByCustomers(customerEntity))
+        final OrdersEntity orderEntity = getOrderEntity(customerEntity);
+        when(mockOrderService.getOrdersByCustomers(customerId))
                 .thenReturn(Collections.singletonList(orderEntity));
 
         final String responseString = mockMvc
@@ -400,10 +378,10 @@ public class OrderControllerTest {
         assertEquals(customerOrderResponse.getOrders().get(0).getId().toString(), orderEntity.getUuid());
         assertEquals(customerOrderResponse.getOrders().get(0).getCustomer().getId().toString(), orderEntity.getCustomer().getUuid());
         assertEquals(customerOrderResponse.getOrders().get(0).getAddress().getId().toString(), orderEntity.getAddress().getUuid());
-        assertEquals(customerOrderResponse.getOrders().get(0).getAddress().getState().getId().toString(), orderEntity.getAddress().getStateId().getUuid());
+        assertEquals(customerOrderResponse.getOrders().get(0).getAddress().getState().getId().toString(), orderEntity.getAddress().getState().getUuid());
 
         verify(mockCustomerService, times(1)).getCustomer("database_accesstoken2");
-        verify(mockOrderService, times(1)).getOrdersByCustomers(customerEntity);
+        verify(mockOrderService, times(1)).getOrdersByCustomers(customerId);
     }
 
     //This test case passes when you have handled the exception of trying to fetch placed orders if you are not logged in.
@@ -419,7 +397,7 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("ATHR-001"));
 
         verify(mockCustomerService, times(1)).getCustomer("invalid_auth");
-        verify(mockOrderService, times(0)).getOrdersByCustomers(any());
+        verify(mockOrderService, times(0)).getOrdersByCustomers(anyString());
     }
 
     //This test case passes when you have handled the exception of trying to fetch placed orders if you are already
@@ -436,7 +414,7 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("ATHR-002"));
 
         verify(mockCustomerService, times(1)).getCustomer("invalid_auth");
-        verify(mockOrderService, times(0)).getOrdersByCustomers(any());
+        verify(mockOrderService, times(0)).getOrdersByCustomers(anyString());
     }
 
     //This test case passes when you have handled the exception of trying to fetch placed orders if your session is
@@ -453,7 +431,7 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("code").value("ATHR-003"));
 
         verify(mockCustomerService, times(1)).getCustomer("invalid_auth");
-        verify(mockOrderService, times(0)).getOrdersByCustomers(any());
+        verify(mockOrderService, times(0)).getOrdersByCustomers(anyString());
     }
 
     // ------------------------------------------ GET /order/coupon/{coupon_name} ------------------------------------------
@@ -627,8 +605,8 @@ public class OrderControllerTest {
 
         final String orderId = UUID.randomUUID().toString();
         final Date orderDate = new Date();
-        return new OrdersEntity(orderId, new BigDecimal(200.50), couponEntity, new BigDecimal(10.0),
-                ZonedDateTime.parse(orderDate.toString()), paymentEntity, customerEntity, addressEntity, restaurantEntity);
+        return new OrdersEntity(orderId, 200.50, couponEntity, 10.0,
+                orderDate, paymentEntity, customerEntity, addressEntity, restaurantEntity);
     }
 
 

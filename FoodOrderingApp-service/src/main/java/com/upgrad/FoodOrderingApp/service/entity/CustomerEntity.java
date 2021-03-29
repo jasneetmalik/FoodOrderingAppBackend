@@ -8,7 +8,8 @@ import javax.validation.constraints.Size;
 @Table(name = "customer")
 @NamedQueries({@NamedQuery(name = "getCustomerByContact", query = "select c from CustomerEntity c where c.contactNumber = :contact"),
 @NamedQuery(name = "getCustomerByPassword", query = "select c from CustomerEntity  c where c.password = :password"),
-@NamedQuery(name = "getCustomerByContactAndPassword", query = "select c from CustomerEntity c where c.contactNumber = :contact and c.password = :password")})
+@NamedQuery(name = "getCustomerByContactAndPassword", query = "select c from CustomerEntity c where c.contactNumber = :contact and c.password = :password"),
+@NamedQuery(name = "getCustomerByUUID", query = "select c from CustomerEntity c where c.uuid = :uuid")})
 public class CustomerEntity {
 
 
