@@ -1,8 +1,10 @@
 package com.upgrad.FoodOrderingApp.api.controller;
 
 import com.upgrad.FoodOrderingApp.api.model.*;
+import com.upgrad.FoodOrderingApp.api.utility.Utility;
 import com.upgrad.FoodOrderingApp.service.businness.CategoryService;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
+import com.upgrad.FoodOrderingApp.service.businness.ItemService;
 import com.upgrad.FoodOrderingApp.service.businness.RestaurantService;
 import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
@@ -32,6 +34,9 @@ public class RestaurantController {
     private CategoryService categoryService;
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private ItemService itemService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/restaurant", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<RestaurantListResponse> getAllRestaurants() throws RestaurantNotFoundException {
@@ -85,7 +90,7 @@ public class RestaurantController {
 
     @RequestMapping(method = RequestMethod.GET, path = "restaurant/{restaurant_id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<RestaurantDetailsResponse> getRestaurantById(@PathVariable("restaurant_id") final String restaurantId)
-        throws RestaurantNotFoundException {
+            throws RestaurantNotFoundException, AuthorizationFailedException, CategoryNotFoundException {
         if (restaurantId == "") {
             throw new RestaurantNotFoundException("RNF-002", "Restaurant id field should not be empty");
         }
@@ -104,31 +109,43 @@ public class RestaurantController {
                 .locality(restaurant.getAddress().getLocality())
                 .pincode(restaurant.getAddress().getPincode())
                 .state(addressState);
-        List<CategoryEntity> categoryList = restaurant.getCategories();
-        CategoryList categories = new CategoryList();
-        for (CategoryEntity category : categoryList) {
-            List<ItemEntity> categoryItems = category.getItems();
-            ItemList itemList = new ItemList();
-            for (ItemEntity item: categoryItems) {
-                itemList.id(UUID.fromString(item.getUuid()))
-                        .itemName(item.getItemName())
-                        .itemType(ItemList.ItemTypeEnum.fromValue(item.getType().getValue()))
-                        .price(item.getPrice());
-            }
-            categories.id(UUID.fromString(category.getUuid()))
-                    .categoryName(category.getCategoryName())
-                    .addItemListItem(itemList);
-        }
 
-        RestaurantDetailsResponse restaurantDetailsResponse = new RestaurantDetailsResponse()
-                .id(UUID.fromString(restaurant.getUuid()))
-                .restaurantName(restaurant.getRestaurantName())
-                .photoURL(restaurant.getPhotoUrl())
-                .customerRating(BigDecimal.valueOf(restaurant.getCustomerRating()))
-                .averagePrice(restaurant.getAvgPrice())
-                .numberCustomersRated(restaurant.getNumberCustomersRated())
-                .address(address)
-                .addCategoriesItem(categories);
+        List<CategoryEntity> categoryEntities = categoryService.getCategoriesByRestaurant(restaurantId);
+        itemService.getItemsByCategoryAndRestaurant(restaurantId, categoryEntities.get(0).getUuid());
+
+        List<ItemEntity> restaurantItemsList = restaurant.getItems();
+        
+        List<CategoryEntity> categoryList = restaurant.getCategories();
+        List<CategoryList> categoryLists = new ArrayList<>();
+        for (CategoryEntity categoryEntity : categoryList) {
+            List<ItemList> itemLists = new ArrayList<>();
+            CategoryList categories = new CategoryList();
+            List<ItemEntity> itemEntityList = new ArrayList<>();
+            categories.setId(UUID.fromString(categoryEntity.getUuid()));
+            categories.setCategoryName(categoryEntity.getCategoryName());
+            itemEntityList = categoryEntity.getItems();
+            for (ItemEntity entity: itemEntityList) {
+                    if(restaurantItemsList.contains(entity)) {
+                        ItemList itemList = new ItemList();
+                        itemList.setItemName(entity.getItemName());
+                        itemList.setItemType(ItemList.ItemTypeEnum.fromValue(entity.getType().toString()));
+                        itemList.setPrice(entity.getPrice());
+                        itemList.setId(UUID.fromString(entity.getUuid()));
+                        itemLists.add(itemList);
+                    }
+                }
+            categories.setItemList(itemLists);
+            categoryLists.add(categories);
+        }
+        RestaurantDetailsResponse restaurantDetailsResponse = new RestaurantDetailsResponse();
+        restaurantDetailsResponse.setRestaurantName(restaurant.getRestaurantName());
+        restaurantDetailsResponse.setAddress(address);
+        restaurantDetailsResponse.setId(UUID.fromString(restaurant.getUuid()));
+        restaurantDetailsResponse.setCategories(categoryLists);
+        restaurantDetailsResponse.setCustomerRating(new BigDecimal(restaurant.getCustomerRating()));
+        restaurantDetailsResponse.setAveragePrice(restaurant.getAvgPrice());
+        restaurantDetailsResponse.setNumberCustomersRated(restaurant.getNumberCustomersRated());
+        restaurantDetailsResponse.setPhotoURL(restaurant.getPhotoUrl());
         return new ResponseEntity<RestaurantDetailsResponse>(restaurantDetailsResponse, HttpStatus.OK);
     }
 

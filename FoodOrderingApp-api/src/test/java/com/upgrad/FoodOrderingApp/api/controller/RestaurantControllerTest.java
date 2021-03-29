@@ -457,6 +457,7 @@ public class RestaurantControllerTest {
 
         final RestaurantEntity restaurantEntity = new RestaurantEntity();
         final String restaurantId = UUID.randomUUID().toString();
+        System.out.println(restaurantId);
         restaurantEntity.setUuid(restaurantId);
         restaurantEntity.setAddress(addressEntity);
         restaurantEntity.setAvgPrice(123);

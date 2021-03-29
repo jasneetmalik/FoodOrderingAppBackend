@@ -1,5 +1,6 @@
 package com.upgrad.FoodOrderingApp.service.dao;
 
+import com.upgrad.FoodOrderingApp.service.entity.CategoryEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantCategoryEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantEntity;
 import org.springframework.stereotype.Repository;
@@ -50,5 +51,4 @@ public class RestaurantDao  {
     public void updateRestaurant(final RestaurantEntity updatedRestaurantEntity) {
         entityManager.merge(updatedRestaurantEntity);
     }
-
 }
